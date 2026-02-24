@@ -2,26 +2,29 @@
   --primary-color: #F9F9F9;
   --secondary-color: #167300;
   --tertiary-color: #222222;
+  --font: 'Onset', sans-serif;
 }
 
-*{
+* {
   box-sizing: border-box;
+  font-family: var(--font);
 }
 
 nav {
   width: 100%;
-  padding: 18px 60px;
+  padding: 24px 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 1000;
 }
 
-.menu ul{
+.menu ul {
   margin: 0;
   padding: 0;
   list-style: none;
   display: flex;
-  gap: 40px;
+  gap: 60px;
 }
 
 .menu ul li {
@@ -46,4 +49,39 @@ nav {
   color: var(--secondary-color);
   border-bottom: 2px solid var(--secondary-color);
   padding-bottom: 5px;
+}
+
+.hero {
+  background-image:
+    linear-gradient(to bottom,
+      rgba(255, 255, 255, 0) 90%,
+      rgba(255, 255, 255, 1) 100%),
+    url('./assets/homeBanner.png');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.hero h1 {
+  font-size: 50px;
+}
+
+.hero h2 {
+  font-size: 38px;
+  margin: 0;
+}
+
+.gap {
+  height: 100vh;
+  width: 100%;
 }
