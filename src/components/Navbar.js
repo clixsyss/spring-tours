@@ -4,7 +4,7 @@ function Navbar() {
     return (
         <nav>
             <div className="logo">
-                <img src="/logo.png" alt="logo" />
+                <img src="/logo.webp" alt="logo" className="logo-image"/>
             </div>
             <div className="menu">
                 <ul>

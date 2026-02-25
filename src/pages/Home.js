@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { FaClock, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
-import logo from "../assets/logo.png";
+import logo from "../assets/logo.webp";
 import verynile from "../assets/home/verynile.png";
 
 const PLAN_CARDS = [
@@ -114,7 +114,7 @@ function Home() {
                 <div className="collaboration-content">
                     <div className="collaboration-list">
                         <img src={verynile} alt="collaboration02" />
-                        <img src={logo} alt="collaboration01" />
+                        <img src={logo} alt="collaboration01" className="collaboration-image"/>
                     </div>
 
                     <div>
