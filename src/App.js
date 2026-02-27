@@ -1,5 +1,6 @@
 import './App.css';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import CruiseShips from './pages/CruiseShips';
@@ -18,6 +19,7 @@ function App() {
         <Route path="/travel-packages" element={<TravelPackages />} />
         <Route path="/transport-fleets" element={<TransportFleets />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
