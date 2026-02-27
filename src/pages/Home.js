@@ -19,26 +19,50 @@ const CRUISES = [
     },
     {
         id: "sphinx-2",
-        title: "S/S Sphinx",
+        title: "M/S Medea",
         description:
-            "Spring Tours started building Nile boats 33 years ago. With every boat built, a new feature or design was added to achieve not only the elegance in style but also the maximum comfort we need for our valued guests. In 2021, Spring Tours inaugurated the Super Ship Sphinx.",
-        imageClass: "cruise-card-1",
-        path: "/cruises/s-s-sphinx",
+            "This boat has been completely reconstructed in 2024 with complete overhaul of all engines, generators and air conditioning system. The new lavish furniture not only ensures the maximum comfort but a combination of stunning colors that add to the serenity and sophistication of this 5 star Nile boat.",
+        imageClass: "cruise-card-2",
+        path: "/cruises/m-s-medea",
     },
     {
         id: "sphinx-3",
-        title: "S/S Sphinx",
+        title: "M/S Miriam",
         description:
-            "Spring Tours started building Nile boats 33 years ago. With every boat built, a new feature or design was added to achieve not only the elegance in style but also the maximum comfort we need for our valued guests. In 2021, Spring Tours inaugurated the Super Ship Sphinx.",
-        imageClass: "cruise-card-1",
-        path: "/cruises/s-s-sphinx",
+            "The MS Miriam cruise boat was completely overhauled in 2023 to reflect both the unique style of Egyptian hospitality combined with  the contemporary comforts and luxury amenities of modern river cruise boats, all while maintaining our attention to eco-friendliness.",
+        imageClass: "cruise-card-3",
+        path: "/cruises/m-s-miriam",
     },
     {
         id: "sphinx-4",
-        title: "S/S Sphinx",
+        title: "M/S Tosca",
         description:
-            "Spring Tours started building Nile boats 33 years ago. With every boat built, a new feature or design was added to achieve not only the elegance in style but also the maximum comfort we need for our valued guests. In 2021, Spring Tours inaugurated the Super Ship Sphinx.",
-        imageClass: "cruise-card-1",
+            "Luxury Defined. Inaugurated in 2009, M/ S Tosca offers old world elegance and sophistication blend in perfect harmony with modern amenities and comforts.This vessel is decorated by the renowned interior design team responsible for furnishing the prestigious, ",
+        imageClass: "cruise-card-4",
+        path: "/cruises/m-s-tosca",
+    },
+    {
+        id: "sphinx-5",
+        title: "M/S La Traviata",
+        description:
+            "M/S La Traviata has proved be a long term favorite with many regular Nile cruise guests.The cozy restaurant on the lower deck serves 88 guests and serves both – international and Egyptian cuisine. Lounge bar with dance floor and music system for evening entertainment.",
+        imageClass: "cruise-card-5",
+        path: "/cruises/m-s-la-traviata",
+    },
+    {
+        id: "sphinx-6",
+        title: "S/S Karim",
+        description:
+            "Built in 1917, this historic vessel was originally used by King Fuad I of Egypt and then by his son King Farouk. After the Egyptian revolution, the S/S Karim was used by the state and hosted President Gamal Abd El Nasser and later on President Anwar Al Sadat and his wife Gihan. ",
+        imageClass: "cruise-card-6",
+        path: "/cruises/s-s-sphinx",
+    },
+    {
+        id: "sphinx-7",
+        title: "Dahabiyaa Judi",
+        description:
+            "There is no better way to explore the beauty of the Nile than onboard a Dahabiyya, a comfortable Egyptian sailing boat with two sails. Europeans have been travelling the Nile with these traditional boats since the 19th century. It has a crew of 10.",
+        imageClass: "cruise-card-7",
         path: "/cruises/s-s-sphinx",
     },
 ];

@@ -259,6 +259,24 @@ nav {
 .cruise-card-1 {
   background-image: url('./assets/cruises/c01.png');
 }
+.cruise-card-2 {
+  background-image: url('./assets/cruises/c02.png');
+}
+.cruise-card-3 {
+  background-image: url('./assets/cruises/c03.png');
+}
+.cruise-card-4 {
+  background-image: url('./assets/cruises/c04.png');
+}
+.cruise-card-5 {
+  background-image: url('./assets/cruises/c05.png');
+}
+.cruise-card-6 {
+  background-image: url('./assets/cruises/c06.png');
+}
+.cruise-card-7 {
+  background-image: url('./assets/cruises/c07.png');
+}
 
 .cruises-arrow {
   position: absolute;
@@ -664,4 +682,164 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.mice-content-container{
+  text-align: center;
+  width: 80%;
+  margin: 0px auto;
+  font-size: 20px;
+}
+
+.mice-media-container {
+  margin-bottom: 40px;
+}
+
+.mice-media-main {
+  width: 100%;
+  height: 650px;
+  border-radius: 32px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.mice-media-main::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.mice-media-title {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #111111;
+  z-index: 1;
+  padding-top: 120px;
+}
+
+.mice-media-thumbs-wrapper {
+  position: relative;
+  margin-top: 26px;
+}
+
+.mice-media-thumbs-track {
+  display: flex;
+  gap: 18px;
+  padding: 10px 80px;
+  overflow-x: auto;
+}
+
+.mice-media-thumb {
+  flex: 0 0 180px;
+  height: 140px;
+  border-radius: 26px;
+  background-size: cover;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mice-media-thumb.is-active {
+  opacity: 1;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+.mice-media-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--blur-color-2);
+  color: var(--tertiary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.mice-media-arrow:hover {
+  background-color: #0d5c00;
+  color: var(--primary-color);
+}
+
+.mice-media-arrow:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+.mice-media-arrow-left {
+  left: 36px;
+}
+
+.mice-media-arrow-right {
+  right: 36px;
+}
+
+.mice-media-main.mice-media-1,
+.mice-media-thumb.mice-media-1 {
+  background-image: url('./assets/mice/mice01.jpg');
+}
+
+.mice-media-main.mice-media-2,
+.mice-media-thumb.mice-media-2 {
+  background-image: url('./assets/mice/mice02.jpg');
+}
+
+.mice-media-main.mice-media-3,
+.mice-media-thumb.mice-media-3 {
+  background-image: url('./assets/mice/mice03.jpg');
+}
+
+.mice-media-main.mice-media-4,
+.mice-media-thumb.mice-media-4 {
+  background-image: url('./assets/mice/mice04.jpg');
+}
+
+.mice-media-main.mice-media-5,
+.mice-media-thumb.mice-media-5 {
+  background-image: url('./assets/mice/mice05.jpg');
+}
+.mice-media-main.mice-media-6,
+.mice-media-thumb.mice-media-6 {
+  background-image: url('./assets/mice/mice06.jpg');
+}
+
+.mice-media-main.mice-media-7,
+.mice-media-thumb.mice-media-7 {
+  background-image: url('./assets/mice/mice07.jpg');
+}
+
+.mice-media-main.mice-media-8,
+.mice-media-thumb.mice-media-8 {
+  background-image: url('./assets/mice/mice08.jpg');
+}
+
+.mice-media-main.mice-media-9,
+.mice-media-thumb.mice-media-9 {
+  background-image: url('./assets/mice/mice09.jpg');
+}
+
+.mice-media-main.mice-media-10,
+.mice-media-thumb.mice-media-10 {
+  background-image: url('./assets/mice/mice10.jpg');
+}
+
+.mice-media-main.mice-media-11,
+.mice-media-thumb.mice-media-11 {
+  background-image: url('./assets/mice/mice11.jpg');
 }
