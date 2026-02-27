@@ -7,9 +7,10 @@ import Home from './pages/Home';
 import CruiseShips from './pages/CruiseShips';
 import TravelPackages from './pages/TravelPackages';
 import TransportFleets from './pages/TransportFleets';
-import CruiseSphinx from './pages/CruiseSphinx';
+import Sphinx from './pages/cruises/Sphinx';
 import About from './pages/About';
 import Mice from './pages/Mice';
+import ScrollToTop from './components/ScrollToTop';
 
 const pageVariants = {
   initial: { opacity: 0, y: 12 },
@@ -80,7 +81,7 @@ function AnimatedRoutes() {
               exit="exit"
               transition={pageTransition}
             >
-              <CruiseSphinx />
+              <Sphinx />
             </motion.div>
           }
         />
@@ -134,6 +135,7 @@ function AnimatedRoutes() {
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Navbar />
       <AnimatedRoutes />
       <Footer />
