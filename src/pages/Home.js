@@ -1,8 +1,49 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { FaClock, FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 import logo from "../assets/logo.webp";
 import verynile from "../assets/home/verynile.png";
+
+const CRUISES = [
+    {
+        id: "sphinx-1",
+        title: "S/S Sphinx",
+        description:
+            "Spring Tours started building Nile boats 33 years ago. With every boat built, a new feature or design was added to achieve not only the elegance in style but also the maximum comfort we need for our valued guests. In 2021, Spring Tours inaugurated the Super Ship Sphinx.",
+        imageClass: "cruise-card-1",
+        path: "/cruises/s-s-sphinx",
+    },
+    {
+        id: "sphinx-2",
+        title: "S/S Sphinx",
+        description:
+            "Spring Tours started building Nile boats 33 years ago. With every boat built, a new feature or design was added to achieve not only the elegance in style but also the maximum comfort we need for our valued guests. In 2021, Spring Tours inaugurated the Super Ship Sphinx.",
+        imageClass: "cruise-card-1",
+        path: "/cruises/s-s-sphinx",
+    },
+    {
+        id: "sphinx-3",
+        title: "S/S Sphinx",
+        description:
+            "Spring Tours started building Nile boats 33 years ago. With every boat built, a new feature or design was added to achieve not only the elegance in style but also the maximum comfort we need for our valued guests. In 2021, Spring Tours inaugurated the Super Ship Sphinx.",
+        imageClass: "cruise-card-1",
+        path: "/cruises/s-s-sphinx",
+    },
+    {
+        id: "sphinx-4",
+        title: "S/S Sphinx",
+        description:
+            "Spring Tours started building Nile boats 33 years ago. With every boat built, a new feature or design was added to achieve not only the elegance in style but also the maximum comfort we need for our valued guests. In 2021, Spring Tours inaugurated the Super Ship Sphinx.",
+        imageClass: "cruise-card-1",
+        path: "/cruises/s-s-sphinx",
+    },
+];
+
+const CRUISE_INDEX_BY_ID = CRUISES.reduce((acc, cruise, index) => {
+    acc[cruise.id] = index;
+    return acc;
+}, {});
 
 const PLAN_CARDS = [
     { id: "plan1", title: "Egypt Express", imageClass: "plan-card-1" },
@@ -18,6 +59,29 @@ const PLAN_CARDS = [
 ];
 
 function Home() {
+    const navigate = useNavigate();
+    const [activeCruiseIndex, setActiveCruiseIndex] = useState(0);
+
+    const currentCruise = CRUISES[activeCruiseIndex];
+    const orderedCruises = [
+        ...CRUISES.slice(activeCruiseIndex),
+        ...CRUISES.slice(0, activeCruiseIndex),
+    ];
+
+    const goToCruise = (cruise) => {
+        navigate(cruise.path);
+    };
+
+    const changeCruise = (direction) => {
+        setActiveCruiseIndex((prev) => {
+            const lastIndex = CRUISES.length - 1;
+            if (direction === "left") {
+                return prev === 0 ? lastIndex : prev - 1;
+            }
+            return prev === lastIndex ? 0 : prev + 1;
+        });
+    };
+
     const planCarouselRef = useRef(null);
 
     const scrollPlanCarousel = (direction) => {
@@ -37,6 +101,73 @@ function Home() {
             </div>
 
             <div className="gap"></div>
+
+            <div className="cruises-container">
+                <h1>Discover Our Cruises</h1>
+                <div className="cruises-layout">
+                    <div className="cruises-copy">
+                        <h2>{currentCruise.title}</h2>
+                        <p>{currentCruise.description}</p>
+                        <button
+                            type="button"
+                            className="btn cruises-cta"
+                            onClick={() => goToCruise(currentCruise)}
+                        >
+                            Explore Now
+                        </button>
+                    </div>
+                    <div className="cruises-carousel-wrapper">
+                        <button
+                            type="button"
+                            className="cruises-arrow cruises-arrow-left"
+                            onClick={() => changeCruise("left")}
+                            aria-label="Previous cruise"
+                        >
+                            <FaArrowLeft size={20} />
+                        </button>
+                        <button
+                            type="button"
+                            className="cruises-arrow cruises-arrow-right"
+                            onClick={() => changeCruise("right")}
+                            aria-label="Next cruise"
+                        >
+                            <FaArrowRight size={20} />
+                        </button>
+                        <div className="cruises-cards">
+                            {orderedCruises.map((cruise) => {
+                                const isActive = cruise.id === currentCruise.id;
+                                const originalIndex = CRUISE_INDEX_BY_ID[cruise.id];
+
+                                return (
+                                    <button
+                                        key={cruise.id}
+                                        type="button"
+                                        className={`cruise-card ${cruise.imageClass} ${isActive ? "is-active" : ""}`}
+                                        onClick={() =>
+                                            setActiveCruiseIndex(
+                                                typeof originalIndex === "number" ? originalIndex : 0
+                                            )
+                                        }
+                                        aria-label={cruise.title}
+                                    />
+                                );
+                            })}
+                        </div>
+                        <div className="cruises-dots">
+                            {CRUISES.map((cruise, index) => (
+                                <button
+                                    key={`${cruise.id}-dot`}
+                                    type="button"
+                                    className={`cruise-dot ${index === activeCruiseIndex ? "is-active" : ""
+                                        }`}
+                                    onClick={() => setActiveCruiseIndex(index)}
+                                    aria-label={`Go to slide ${index + 1}`}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div className="content-container">
                 <div className="destinations-container">
@@ -114,7 +245,7 @@ function Home() {
                 <div className="collaboration-content">
                     <div className="collaboration-list">
                         <img src={verynile} alt="collaboration02" />
-                        <img src={logo} alt="collaboration01" className="collaboration-image"/>
+                        <img src={logo} alt="collaboration01" className="collaboration-image" />
                     </div>
 
                     <div>
@@ -127,7 +258,7 @@ function Home() {
 
             <div className="content-container">
                 <div className="testimonials-container">
-                    <h1>Hear From Our Happy Travelers</h1>
+                    <h1>Hear From Our <br />Happy Travelers</h1>
                 </div>
             </div>
         </div>

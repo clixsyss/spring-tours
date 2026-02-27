@@ -190,6 +190,134 @@ nav {
   margin: 0 auto;
 }
 
+.cruises-container {
+  margin-bottom: 60px;
+  padding-left: 80px;
+}
+
+.cruises-container > h1 {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.cruises-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+  gap: 40px;
+  align-items: center;
+}
+
+.cruises-copy h2 {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.cruises-copy p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  max-width: 520px;
+}
+
+.cruises-cta {
+  padding-inline: 32px;
+}
+
+.cruises-carousel-wrapper {
+  position: relative;
+}
+
+.cruises-cards {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  overflow: hidden;
+  padding: 16px 40px;
+  padding-bottom: 40px;
+}
+
+.cruise-card {
+  flex: 0 0 220px;
+  height: 320px;
+  border-radius: 32px;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+  cursor: pointer;
+  opacity: 0.5;
+  border: none;
+}
+
+.cruise-card.is-active {
+  flex-basis: 340px;
+  height: 460px;
+  transform: translateY(-8px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+  opacity: 1;
+}
+
+.cruise-card-1 {
+  background-image: url('./assets/cruises/c01.png');
+}
+
+.cruises-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--blur-color-2);
+  color: var(--tertiary-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.cruises-arrow:hover {
+  background-color: #0d5c00;
+  color: var(--primary-color);
+}
+
+.cruises-arrow:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+.cruises-arrow-left {
+  left: 0;
+}
+
+.cruises-arrow-right {
+  right: 0;
+}
+
+.cruises-dots {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.cruise-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: none;
+  background-color: #d0d7d4;
+  cursor: pointer;
+  transition: background-color 0.2s ease, width 0.2s ease;
+}
+
+.cruise-dot.is-active {
+  width: 26px;
+  background-color: var(--secondary-color);
+}
+
 .plan-carousel-wrapper {
   position: relative;
   width: 100%;

@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import CruiseShips from './pages/CruiseShips';
 import TravelPackages from './pages/TravelPackages';
 import TransportFleets from './pages/TransportFleets';
+import CruiseSphinx from './pages/CruiseSphinx';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cruise-ships" element={<CruiseShips />} />
+        <Route path="/cruises/s-s-sphinx" element={<CruiseSphinx />} />
         <Route path="/travel-packages" element={<TravelPackages />} />
         <Route path="/transport-fleets" element={<TransportFleets />} />
       </Routes>
