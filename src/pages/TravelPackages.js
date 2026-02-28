@@ -53,9 +53,8 @@ function TravelPackages() {
                     <ul>
                         {PACKAGE_CATEGORIES.map((cat, i) => (
                             <Fragment key={cat}>
-                                <hr />
+                                {i > 0 && <hr />}
                                 <li>
-                                    {i > 0}
                                     <button
                                         type="button"
                                         className={selectedCategory === cat ? "active" : ""}
