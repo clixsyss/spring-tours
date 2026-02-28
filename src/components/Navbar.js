@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function Navbar() {
+    const location = useLocation();
     return (
         <nav>
             <div className="logo">
@@ -12,7 +14,7 @@ function Navbar() {
                         <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""} end>Home</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/cruise-ships" className={({ isActive }) => isActive ? "active" : ""}>Cruise Ships</NavLink>
+                        <NavLink to="/cruise-ships" className={({ isActive }) => isActive || location.pathname.startsWith("/cruises/") ? "active" : ""}>Cruise Ships</NavLink>
                     </li>
                     <li>
                         <NavLink to="/travel-packages" className={({ isActive }) => isActive ? "active" : ""}>Travel Packages</NavLink>
