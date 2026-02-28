@@ -1113,23 +1113,38 @@ nav {
   color: var(--secondary-color);
 }
 
-.cruise-itinerary-tab-panel ol {
+.cruise-itinerary-tab-panel ol,
+.travel-packages-details-itinerary ol {
   color: var(--secondary-color);
   font-weight: 900;
   font-size: 20px;
 }
 
-.cruise-itinerary-tab-panel ol span {
+.cruise-itinerary-day{
+  color: var(--secondary-color) !important;
+}
+
+.cruise-itinerary-tab-panel ol span,
+.travel-packages-details-itinerary ol span {
   color: var(--tertiary-color);
 }
 
-.cruise-itinerary-tab-panel ol p {
+.cruise-itinerary-tab-panel ol p,
+.travel-packages-details-itinerary ol p,
+.travel-packages-details-overview ol,
+.travel-packages-details-itinerary ul {
   color: var(--tertiary-color);
   font-size: 18px;
   line-height: 1.6;
   margin-bottom: 24px;
   text-align: justify;
   font-weight: 400;
+}
+
+.travel-packages-details-empty {
+  color: var(--tertiary-color);
+  font-size: 18px;
+  font-style: italic;
 }
 
 .cruise-itinerary-notes {

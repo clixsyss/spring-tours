@@ -13,6 +13,7 @@ import Miriam from './pages/cruises/Miriam';
 import About from './pages/About';
 import Mice from './pages/Mice';
 import ScrollToTop from './components/ScrollToTop';
+import TravelPackagesDetails from './pages/TravelPackagesDetails';
 
 const pageVariants = {
   initial: { opacity: 0, y: 12 },
@@ -126,6 +127,20 @@ function AnimatedRoutes() {
               transition={pageTransition}
             >
               <TravelPackages />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/travel-packages/details/:id"
+          element={
+            <motion.div
+              variants={pageVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              transition={pageTransition}
+            >
+              <TravelPackagesDetails />
             </motion.div>
           }
         />

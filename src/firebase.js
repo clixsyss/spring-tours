@@ -8,7 +8,7 @@
 
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
-import { getFirestore, collection, getDocs, query, where } from "firebase/firestore";
+import { getFirestore, collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 
 // Option A: use environment variables (recommended)
 const firebaseConfig = {
@@ -53,6 +53,17 @@ export async function getTravelPackages(category) {
       : col;
   const snapshot = await getDocs(q);
   return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
+
+/**
+ * Fetch a single travel package by ID.
+ * @param {string} id - Firestore document ID
+ * @returns {Promise<{ id: string, title: string, ... } | null>}
+ */
+export async function getTravelPackageById(id) {
+  if (!id) return null;
+  const d = await getDoc(doc(db, TRAVEL_PACKAGES_COLLECTION, id));
+  return d.exists() ? { id: d.id, ...d.data() } : null;
 }
 
 /**

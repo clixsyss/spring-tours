@@ -1,14 +1,14 @@
 import { useState, useEffect, Fragment } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { getTravelPackages, PACKAGE_CATEGORIES } from "../firebase";
-
+import { useNavigate } from "react-router-dom";
 function TravelPackages() {
     const [packages, setPackages] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("All Tours");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
-
+    const navigate = useNavigate();
     useEffect(() => {
         let cancelled = false;
         setLoading(true);
@@ -105,7 +105,7 @@ function TravelPackages() {
                                         <div className="travel-package-code">Code: {activePackage.code}</div>
                                     </div>
                                 </div>
-                                <button type="button" className="btn travel-package-explore">
+                                <button type="button" className="btn travel-package-explore" onClick={() => navigate(`/travel-packages/details/${activePackage.id}`)}>
                                     Explore Now
                                 </button>
                             </div>

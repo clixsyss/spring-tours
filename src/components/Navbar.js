@@ -17,7 +17,7 @@ function Navbar() {
                         <NavLink to="/cruise-ships" className={({ isActive }) => isActive || location.pathname.startsWith("/cruises/") ? "active" : ""}>Cruise Ships</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/travel-packages" className={({ isActive }) => isActive ? "active" : ""}>Travel Packages</NavLink>
+                        <NavLink to="/travel-packages" className={({ isActive }) => isActive || location.pathname.startsWith("/travel-packages/") ? "active" : ""}>Travel Packages</NavLink>
                     </li>
                     <li>
                         <NavLink to="/transport-fleets" className={({ isActive }) => isActive ? "active" : ""}>Transport Fleets</NavLink>
