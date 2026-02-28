@@ -259,21 +259,27 @@ nav {
 .cruise-card-1 {
   background-image: url('./assets/cruises/c01.png');
 }
+
 .cruise-card-2 {
   background-image: url('./assets/cruises/c02.png');
 }
+
 .cruise-card-3 {
   background-image: url('./assets/cruises/c03.png');
 }
+
 .cruise-card-4 {
   background-image: url('./assets/cruises/c04.png');
 }
+
 .cruise-card-5 {
   background-image: url('./assets/cruises/c05.png');
 }
+
 .cruise-card-6 {
   background-image: url('./assets/cruises/c06.png');
 }
+
 .cruise-card-7 {
   background-image: url('./assets/cruises/c07.png');
 }
@@ -684,7 +690,7 @@ nav {
   justify-content: center;
 }
 
-.mice-content-container{
+.mice-content-container {
   text-align: center;
   width: 80%;
   margin: 0px auto;
@@ -814,6 +820,7 @@ nav {
 .mice-media-thumb.mice-media-5 {
   background-image: url('./assets/mice/mice05.jpg');
 }
+
 .mice-media-main.mice-media-6,
 .mice-media-thumb.mice-media-6 {
   background-image: url('./assets/mice/mice06.jpg');
@@ -902,7 +909,8 @@ nav {
 }
 
 .cruise-gallery.is-expanded {
-  max-height: 999px; /* large enough to show all */
+  max-height: 999px;
+  /* large enough to show all */
 }
 
 .cruise-gallery-item {
@@ -984,6 +992,7 @@ nav {
   0% {
     transform: translateX(-100%);
   }
+
   100% {
     transform: translateX(350%);
   }
@@ -1002,7 +1011,7 @@ nav {
   font-size: 14px;
 }
 
-.cruise-overview{
+.cruise-overview {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 220px;
@@ -1021,7 +1030,7 @@ nav {
   text-align: justify;
 }
 
-.cruise-tabs{
+.cruise-tabs {
   display: flex;
   gap: 40px;
   margin: 40px 0;
@@ -1039,7 +1048,7 @@ nav {
   gap: 40px;
 }
 
-.features02{
+.features02 {
   background: #3D6C451A;
   border-radius: 16px;
   width: 50%;
@@ -1087,6 +1096,104 @@ nav {
   }
 }
 
-.is-active-tab{
+.is-active-tab {
   background-color: var(--blur-color-2);
+}
+
+.cruise-itinerary-3-night ol {
+  color: var(--secondary-color);
+  font-weight: 900;
+  font-size: 20px;
+}
+
+.cruise-itinerary-3-night ol span {
+  color: var(--tertiary-color);
+}
+
+.cruise-itinerary-3-night ol p {
+  color: var(--tertiary-color);
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  text-align: justify;
+  font-weight: 400;
+}
+
+.cruise-itinerary-notes {
+  text-align: center;
+  border-radius: 16px;
+  padding: 24px;
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+
+.cruise-itinerary-notes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  padding-top: 40px;
+}
+
+.cruise-itinerary-notes h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--tertiary-color);
+}
+
+.cruise-itinerary-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+/* this takes two thirds of the grid by default */
+.cruise-itinerary-tab-panel {
+  grid-column: 1 / span 2;
+}
+
+/* this takes the one third width of the grid */
+.help-form {
+  margin: 0 auto;
+  grid-column: 2 / span 1;
+  background: #3D6C4526;
+  padding: 40px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.help-form form textarea,
+.help-form form input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: var(--blur-color);
+  color: var(--tertiary-color);
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.help-form form textarea{
+  height: 120px;
+  resize: vertical;
+}
+
+.help-form form button{
+  width: 40%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: var(--blur-color-2);
+  color: var(--tertiary-color);
+  font-size: 18px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.help-form form button:hover{
+  background: var(--blur-color-2);
+  color: var(--tertiary-color);
 }

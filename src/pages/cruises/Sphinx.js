@@ -16,6 +16,9 @@ import barIcon from "../../assets/icons/bar.svg";
 import coffeeIcon from "../../assets/icons/coffee.svg";
 import wifiIcon from "../../assets/icons/wifi.svg";
 import suits03Icon from "../../assets/icons/suits03.svg";
+import restaurantIcon02 from "../../assets/icons/restaurants02.svg";
+import swimmingIcon02 from "../../assets/icons/swimming02.svg";
+import fitnessIcon02 from "../../assets/icons/fitness02.svg";
 
 const SPHINX_GALLERY_FOLDER = "cruises/SS Sphinx";
 
@@ -34,6 +37,9 @@ const CRUISE_FEATURES = [
     { icon: coffeeIcon, label: "Coffee Room" },
     { icon: wifiIcon, label: "WiFi in Public Areas" },
     { icon: suits03Icon, label: "4 Royal Suites 46 sqm" },
+    { icon: restaurantIcon02, label: "Full Board" },
+    { icon: swimmingIcon02, label: "Entertaining Amentities" },
+    { icon: fitnessIcon02, label: "Fitness Facilities" },
 ];
 const INITIAL_VISIBLE_GALLERY_COUNT = 7;
 
@@ -44,6 +50,7 @@ function Sphinx() {
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [showAll, setShowAll] = useState(false);
     const [activeTab, setActiveTab] = useState("overview");
+    const [activeCruiseItineraryTab, setActiveCruiseItineraryTab] = useState("3-night-cruise");
     useEffect(() => {
         let isSubscribed = true;
 
@@ -253,8 +260,122 @@ function Sphinx() {
                         transition={{ duration: 0.25, ease: "easeOut" }}
                     >
                         <div className="cruise-itinerary">
-                            <h2>Cruise Itinerary</h2>
-                            <p>Cruise Itinerary</p>
+                            <div className="cruise-tabs">
+                                <button type="button" className={`btn btn-primary ${activeCruiseItineraryTab === "3-night-cruise" ? "is-active-tab" : ""}`} onClick={() => setActiveCruiseItineraryTab("3-night-cruise")}>
+                                    3-Night Cruise
+                                </button>
+                                <button type="button" className={`btn btn-primary ${activeCruiseItineraryTab === "4-night-cruise" ? "is-active-tab" : ""}`} onClick={() => setActiveCruiseItineraryTab("4-night-cruise")}>
+                                    4-Night Cruise
+                                </button>
+                                <button type="button" className={`btn btn-primary ${activeCruiseItineraryTab === "7-night-cruise" ? "is-active-tab" : ""}`} onClick={() => setActiveCruiseItineraryTab("7-night-cruise")}>
+                                    7-Night Cruise
+                                </button>
+                            </div>
+
+                            <div className="cruise-itinerary-content">
+
+                                {activeCruiseItineraryTab === "3-night-cruise" && (
+                                    <motion.div
+                                        key="3-night-cruise"
+                                        className="cruise-tab-panel"
+                                        initial={{ opacity: 0, y: 12 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -8 }}
+                                        transition={{ duration: 0.25, ease: "easeOut" }}
+                                    >
+                                        <div className="cruise-itinerary-3-night cruise-itinerary-tab-panel">
+                                            <ol>
+                                                <li>
+                                                    Day1: <span>Friday: Cruise embarkation - Aswan sightseeing</span>
+                                                    <p>Embarkation before lunch. Visit the High Dam, Philae Temple & the Unfinished Obelisk. Overnight in Aswan.</p>
+                                                </li>
+                                                <li>
+                                                    Day2: <span>Saturday: Kom Ombo - Sail to Edfu</span>
+                                                    <p>Chance for optional Abu Simbel excursion. Sail to Kom Ombo. In the afternoon, visit the unusual Temple of Kom Ombo. One side of the temple is dedicated to the crocodile god Sobek, god of fertility and creator of the world. The other side is dedicated to the falcon god Haroeris, also known as Horus the Elder. Sail to Edfu. Overnight aboard.</p>
+                                                </li>
+                                                <li>
+                                                    Day3: <span>Sunday: Esna Temple - Sail to Luxor</span>
+                                                    <p>Sail for Esna & visit its temple, sail to Luxor. Visit Luxor Temple. This temple is testimony to the history of the continuous history of Egypt, beginning from the 18th dynasty of Ancient Egyptian rule to the 14th century AD when a mosque was built in the complex. Many pharaohs played a part in building this temple over the years including Tutankhamen, Hatshepsut, Ramses II, and Amenhotep III. Dinner and overnight aboard.</p>
+                                                </li>
+                                                <li>
+                                                    Day4: <span>Monday: Cruise Disembarkation - Luxor Sightseeing Tour</span>
+                                                    <p>Breakfast followed by cruise disembarkation. Your tour today will start with the Valley of the Kings. For a period of nearly 500 years, tombs were constructed for the kings and powerful nobles of Ancient Egypt. In modern times, the valley has become famous for the discovery of the tomb of Tut Ankh Amun and is one of the most famous archaeological sites in the world. On the West Bank, you will also visit the Temple of Queen Hatshepsut and see the Colossi of Memnon. Afterwards, you will cross the Nile and visit Karnak Temple. This Ancient complex covers an area of ca. 2 sq. km. The temple of Amun, the complex's main structure, is the largest place of worship ever built!</p>
+                                                </li>
+                                            </ol>
+                                            <p><b>Notes:</b></p>
+                                            <ul>
+                                                <li>This itinerary may be changed without prior notice due to navigational restrictions.</li>
+                                                <li>The itinerary may change in sequence but all visits will be offered.</li>
+                                            </ul>
+                                        </div>
+                                    </motion.div>
+                                )}
+                                {activeCruiseItineraryTab === "4-night-cruise" && (
+                                    <motion.div
+                                        key="4-night-cruise"
+                                        className="cruise-tab-panel"
+                                        initial={{ opacity: 0, y: 12 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -8 }}
+                                        transition={{ duration: 0.25, ease: "easeOut" }}
+                                    >
+                                        <div className="cruise-itinerary-4-night cruise-itinerary-tab-panel">
+                                            <h2>4-Night Cruise</h2>
+                                            <p>4-Night Cruise</p>
+                                        </div>
+                                    </motion.div>
+                                )}
+                                {activeCruiseItineraryTab === "7-night-cruise" && (
+                                    <motion.div
+                                        key="7-night-cruise"
+                                        className="cruise-tab-panel"
+                                        initial={{ opacity: 0, y: 12 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -8 }}
+                                        transition={{ duration: 0.25, ease: "easeOut" }}
+                                    >
+                                        <div className="cruise-itinerary-7-night cruise-itinerary-tab-panel">
+                                            <h2>7-Night Cruise</h2>
+                                            <p>7-Night Cruise</p>
+                                        </div>
+                                    </motion.div>
+                                )}
+
+                                <div className="help-form">
+                                    <h2>Need Help?</h2>
+                                    <p>Are you interested in our pricing, offers, and tailored arrangements?</p>
+                                    <form>
+                                        <input type="text" placeholder="Name" />
+                                        <input type="email" placeholder="Email" />
+                                        <input type="tel" placeholder="Phone" />
+                                        <textarea placeholder="Message" />
+                                        <button type="submit">Submit</button>
+                                    </form>
+                                    <p>We'll get back to you as soon as possible.</p>
+                                </div>
+                            </div>
+
+
+                            <div className="cruise-itinerary-notes">
+                                <h2>Always Included in our Cruises</h2>
+                                <div className="cruise-itinerary-notes-grid">
+                                    <div>
+                                        <img src={restaurantIcon02} alt="Restaurant" />
+                                        <h4>Full Board</h4>
+                                        <p>Breakfast, Lunch Dinner in main restaurant and buffet.</p>
+                                    </div>
+                                    <div>
+                                        <img src={swimmingIcon02} alt="Swimming" />
+                                        <h4>Entertaining Amentities</h4>
+                                        <p>Sun deck and rooftop bar</p>
+                                    </div>
+                                    <div>
+                                        <img src={fitnessIcon02} alt="Fitness" />
+                                        <h4>Fitness Facilities</h4>
+                                        <p>Gym, Pools, and Sports Facilities with Free Access</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </motion.div>
                 )}
