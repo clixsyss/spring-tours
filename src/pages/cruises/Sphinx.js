@@ -320,8 +320,34 @@ function Sphinx() {
                                         transition={{ duration: 0.25, ease: "easeOut" }}
                                     >
                                         <div className="cruise-itinerary-4-night cruise-itinerary-tab-panel">
-                                            <h2>4-Night Cruise</h2>
-                                            <p>4-Night Cruise</p>
+                                            <ol>
+                                                <li>
+                                                    Day1: <span>Moday</span>
+                                                    <p>Embarkation before lunch. In the afternoon, visit Karnak Temple on the East Bank. Overnight aboard.</p>
+                                                </li>
+                                                <li>
+                                                    Day2: <span>Tuesday</span>
+                                                    <p>In the morning, visit Dendara Temple, the colorful temple dedicated to the Goddess Hathor. Back to the boat at lunch time. In the afternoon, visit Luxor Temple. This temple is a testimony to the history of the continuous history of Egypt, beginning from the 18th dynasty of Ancient Egyptian rule to the 14th century AD when a mosque was built in the complex. Many pharaohs played a part in building this temple over the years including Tutankhamen, Hatshepsut, Ramses II, and Amenhotep III. Overnight aboard in Luxor .</p>
+                                                </li>
+                                                <li>
+                                                    Day3: <span>Wednesday</span>
+                                                    <p>Your tour in Luxor (frequently characterized as “the world’s greatest open air museum”) will start with the Valley of the Kings. For a period of nearly 500 years, tombs were constructed for the kings and powerful nobles of Ancient Egypt. In modern times, the valley has become famous for the discovery of the tomb of Tut Ankh Amun and is one of the most famous archaeological sites in the world. On the West Bank, you will also visit the Temple of Queen Hatshepsut and see the Colossi of Memnon. Back to the boat. Sail to Kom Ombo. Overnight aboard.</p>
+                                                </li>
+                                                <li>
+                                                    Day4: <span>Thursday</span>
+                                                    <p>In the morning, visit the unusual Temple of Kom Ombo. One side of the temple is dedicated to the crocodile god Sobek, god of fertility and creator of the world. The other side is dedicated to the falcon god Haroeris, also known as Horus the Elder. Sail to Aswan, visit the High Dam, the Unfinished Obelisk and Philae Temple. Overnight aboard in Aswan.</p>
+                                                </li>
+                                                <li>
+                                                    Day5: <span>Friday</span>
+                                                    <p>Disembarkation in the morning. Optional excursion to Abu Simbel.</p>
+                                                </li>
+                                            </ol>
+                                            <p><b>Notes:</b></p>
+                                            <ul>
+                                                <li>This itinerary may be changed without prior notice due to navigational restrictions.</li>
+                                                <li>The itinerary may change in sequence but all visits will be offered.</li>
+                                                <li>In case of low water levels, the visit of Dendara Temple will be arranged by road from Luxor.</li>
+                                            </ul>
                                         </div>
                                     </motion.div>
                                 )}
@@ -335,8 +361,46 @@ function Sphinx() {
                                         transition={{ duration: 0.25, ease: "easeOut" }}
                                     >
                                         <div className="cruise-itinerary-7-night cruise-itinerary-tab-panel">
-                                            <h2>7-Night Cruise</h2>
-                                            <p>7-Night Cruise</p>
+                                            <ol>
+                                                <li>
+                                                    Day1: <span>Moday</span>
+                                                    <p>Embarkation before lunch. In the afternoon, visit Karnak Temple. Overnight aboard.</p>
+                                                </li>
+                                                <li>
+                                                    Day2: <span>Tuesday</span>
+                                                    <p>In the morning, visit Dendara Temple dedicated to the Goddess Hathor. Return to boat around lunch time. In the afternoon, visit Luxor Temple. This temple is a testimony to the history of the continuous history of Egypt, beginning from the 18th dynasty of Ancient Egyptian rule to the 14th century AD when a mosque was built in the complex. Many pharaohs played a part in building this temple over the years including Tutankhamen, Hatshepsut, Ramses II, and Amenhotep III. Overnight aboard in Luxor.</p>
+                                                </li>
+                                                <li>
+                                                    Day3: <span>Wednesday</span>
+                                                    <p>Your tour in Luxor (frequently characterized as “the world’s greatest open air museum”) will start with the Valley of the Kings. For a period of nearly 500 years, tombs were constructed for the kings and powerful nobles of Ancient Egypt. In modern times, the valley has become famous for the discovery of the tomb of Tut Ankh Amun and is one of the most famous archaeological sites in the world. On the West Bank, you will also visit the Temple of Queen Hatshepsut and see the Colossi of Memnon. Back to the boat. Sail to Kom Ombo. Overnight aboard.</p>
+                                                </li>
+                                                <li>
+                                                    Day4: <span>Thursday</span>
+                                                    <p>In the morning, visit the unusual Temple of Kom Ombo. One side of the temple is dedicated to the crocodile god Sobek, god of fertility and creator of the world. The other side is dedicated to the falcon god Haroeris, also known as Horus the Elder. Sail to Aswan, visit the High Dam, the Unfinished Obelisk and Philae Temple. Overnight aboard in Aswan.</p>
+                                                </li>
+                                                <li>
+                                                    Day5: <span>Friday</span>
+                                                    <p>In the morning, optional excursion to Abu Simbel. In the afternoon, felucca sailing around the islands. Overnight aboard in Aswan.</p>
+                                                </li>
+                                                <li>
+                                                    Day6: <span>Saturday</span>
+                                                    <p>In the morning, sailing to Kom Ombo then to Edfu. Overnight aboard in Edfu.</p>
+                                                </li>
+                                                <li>
+                                                    Day7: <span>Sunday</span>
+                                                    <p>Sailing to Esna & visit its temple. Sailing to Luxor. Overnight aboard in Luxor.</p>
+                                                </li>
+                                                <li>
+                                                    Day8: <span>Monday</span>
+                                                    <p>Cruise disembarkation.</p>
+                                                </li>
+                                            </ol>
+                                            <p><b>Notes:</b></p>
+                                            <ul>
+                                                <li>This itinerary may be changed without prior notice due to navigational restrictions.</li>
+                                                <li>The itinerary may change in sequence but all visits will be offered.</li>
+                                                <li>In case of low water levels, the visit of Dendara Temple will be arranged by road from Luxor.</li>
+                                            </ul>
                                         </div>
                                     </motion.div>
                                 )}

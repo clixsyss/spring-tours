@@ -1037,6 +1037,10 @@ nav {
   margin-top: 60px;
 }
 
+.cruise-tabs button {
+  font-weight: 900;
+}
+
 .cruise-features {
   margin-top: 48px;
   margin-bottom: 48px;
@@ -1098,19 +1102,20 @@ nav {
 
 .is-active-tab {
   background-color: var(--blur-color-2);
+  color: var(--secondary-color);
 }
 
-.cruise-itinerary-3-night ol {
+.cruise-itinerary-tab-panel ol {
   color: var(--secondary-color);
   font-weight: 900;
   font-size: 20px;
 }
 
-.cruise-itinerary-3-night ol span {
+.cruise-itinerary-tab-panel ol span {
   color: var(--tertiary-color);
 }
 
-.cruise-itinerary-3-night ol p {
+.cruise-itinerary-tab-panel ol p {
   color: var(--tertiary-color);
   font-size: 18px;
   line-height: 1.6;
