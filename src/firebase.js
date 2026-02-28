@@ -8,6 +8,7 @@
 
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
+import { getFirestore, collection, getDocs, query, where } from "firebase/firestore";
 
 // Option A: use environment variables (recommended)
 const firebaseConfig = {
@@ -23,8 +24,36 @@ const firebaseConfig = {
 // Initialize Firebase app (safe to call once)
 const app = initializeApp(firebaseConfig);
 
-// Export a Storage instance
+// Export Storage and Firestore
 export const storage = getStorage(app);
+export const db = getFirestore(app);
+
+export const TRAVEL_PACKAGES_COLLECTION = "travelPackages";
+
+/** Categories matching the Travel Packages nav (and dashboard dropdown). */
+export const PACKAGE_CATEGORIES = [
+  "All Tours",
+  "City Breaks",
+  "Classic Egypt Tours",
+  "Coptic/Islamic Culture",
+  "Nile Cruises",
+  "Red sea Beach Breaks",
+];
+
+/**
+ * Fetch all travel packages from Firestore, optionally filtered by category.
+ * @param {string} [category] - If provided and not "All Tours", only packages with this category are returned.
+ * @returns {Promise<Array<{ id: string, title: string, description: string, code: string, category: string, imageURL: string }>>}
+ */
+export async function getTravelPackages(category) {
+  const col = collection(db, TRAVEL_PACKAGES_COLLECTION);
+  const q =
+    category && category !== "All Tours"
+      ? query(col, where("category", "==", category))
+      : col;
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
 
 /**
  * List all image file URLs inside a given folder in Firebase Storage.
