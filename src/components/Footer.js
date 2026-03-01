@@ -1,6 +1,6 @@
 import logo from "../assets/logo.webp";
 import { Link } from "react-router-dom";
-import { FaFacebookF, FaInstagram, FaWhatsapp, FaEnvelope, FaMapMarked, FaPhone } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaWhatsapp, FaEnvelope, FaPhone, FaFax, FaMapMarkerAlt } from "react-icons/fa";
 function Footer() {
     return (
         <>
@@ -28,7 +28,7 @@ function Footer() {
                         <h3>Contact Us</h3>
                         <ul>
                             <li>
-                                <FaMapMarked />
+                                <FaMapMarkerAlt />
                                 <span>3, El Sayed El Bakry Street 11211 Zamalek, Cairo, Egypt</span>
                             </li>
                             <li>
@@ -36,7 +36,7 @@ function Footer() {
                                 <span>+202 27365973</span>
                             </li>
                             <li>
-                                <FaPhone />
+                                <FaFax />
                                 <span>+202 27365967</span>
                             </li>
                             <li>

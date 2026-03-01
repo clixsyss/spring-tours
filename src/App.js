@@ -11,7 +11,9 @@ import CruiseDetail from './pages/CruiseDetail';
 import About from './pages/About';
 import Mice from './pages/Mice';
 import ScrollToTop from './components/ScrollToTop';
+import WhatsAppChatButton from './components/WhatsAppChatButton';
 import TravelPackagesDetails from './pages/TravelPackagesDetails';
+import Contact from './pages/Contact';
 
 const pageVariants = {
   initial: { opacity: 0, y: 12 },
@@ -142,6 +144,20 @@ function AnimatedRoutes() {
             </motion.div>
           }
         />
+        <Route
+          path="/contact"
+          element={
+            <motion.div
+              variants={pageVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              transition={pageTransition}
+            >
+              <Contact />
+            </motion.div>
+          }
+        />
       </Routes>
     </AnimatePresence>
   );
@@ -154,6 +170,7 @@ function App() {
       <Navbar />
       <AnimatedRoutes />
       <Footer />
+      <WhatsAppChatButton />
     </BrowserRouter>
   );
 }

@@ -575,13 +575,13 @@ nav {
   justify-content: space-evenly;
 }
 
-.footer-content ul {
+.footer-content ul, .contact-office ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.footer-content ul li {
+.footer-content ul li, .contact-office ul li {
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -589,7 +589,7 @@ nav {
 }
 
 .emailLink,
-.footer-content ul li a {
+.footer-content ul li a, .contact-office ul li a {
   color: var(--tertiary-color);
   text-decoration: none;
 }
@@ -599,7 +599,7 @@ nav {
 }
 
 .emailLink:hover,
-.footer-content ul li a:hover {
+.footer-content ul li a:hover, .contact-office ul li a:hover {
   color: var(--secondary-color);
 }
 
@@ -611,14 +611,14 @@ nav {
   padding: 10px;
 }
 
-.about-banner, .travel-packages-banner {
+.about-banner, .travel-packages-banner, .contact-banner {
   background-image: url('./assets/aboutBanner.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   padding: 120px 60px;
   border-radius: 24px;
-  height: 500px;
+  height: 600px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -626,6 +626,14 @@ nav {
   color: var(--tertiary-color);
   font-size: 32px;
   font-weight: 600;
+}
+
+.contact-banner{
+  background-image: url('./assets/contact.png');
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 60px;
 }
 
 .travel-packages-banner {
@@ -1433,4 +1441,111 @@ nav {
 
 .travel-packages-arrow-right {
   right: 8px;
+}
+
+.contact-content{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 60px;
+  text-align: justify;
+}
+
+.contact-locations-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px 40px;
+  padding: 48px 60px 60px;
+  justify-content: space-between;
+}
+
+.contact-location-card {
+  padding: 24px;
+  border-radius: 16px;
+}
+
+.contact-location-card h3 {
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--tertiary-color);
+}
+
+.contact-location-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contact-location-card ul li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: var(--tertiary-color);
+  line-height: 1.4;
+}
+
+.contact-location-card ul li:last-child {
+  margin-bottom: 0;
+}
+
+.contact-location-card ul li svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #666;
+  width: 14px;
+  height: 14px;
+}
+
+.contact-location-card ul li a {
+  color: var(--tertiary-color);
+  text-decoration: none;
+}
+
+.contact-location-card ul li a:hover {
+  color: var(--secondary-color);
+}
+
+.contact-map-wrap {
+  position: relative;
+  padding: 0 60px 60px;
+}
+
+.contact-map-wrap iframe {
+  display: block;
+  width: 100%;
+  height: 650px;
+  border-radius: 12px;
+  margin: 0 auto;
+}
+
+.contact-map-spinner {
+  position: absolute;
+  top: 0;
+  left: 60px;
+  right: 60px;
+  height: 650px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  border-radius: 12px;
+  z-index: 1;
+}
+
+.contact-map-spinner-wheel {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #e0e0e0;
+  border-top-color: var(--secondary-color);
+  border-radius: 50%;
+  animation: contact-map-spin 0.9s linear infinite;
+}
+
+@keyframes contact-map-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
