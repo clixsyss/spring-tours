@@ -164,7 +164,7 @@ nav {
 }
 
 .btn {
-  background-color: #15730010;
+  /* background-color: #15730010; */
   color: var(--tertiary-color);
   border: none;
   border-radius: 18px;
@@ -175,6 +175,11 @@ nav {
   backdrop-filter: blur(1px);
   border: 1px solid var(--blur-color);
   transition: all 0.3s ease;
+  background: #3D6C451A;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
 .btn:hover {
@@ -575,13 +580,15 @@ nav {
   justify-content: space-evenly;
 }
 
-.footer-content ul, .contact-office ul {
+.footer-content ul,
+.contact-office ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.footer-content ul li, .contact-office ul li {
+.footer-content ul li,
+.contact-office ul li {
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -589,7 +596,8 @@ nav {
 }
 
 .emailLink,
-.footer-content ul li a, .contact-office ul li a {
+.footer-content ul li a,
+.contact-office ul li a {
   color: var(--tertiary-color);
   text-decoration: none;
 }
@@ -599,7 +607,8 @@ nav {
 }
 
 .emailLink:hover,
-.footer-content ul li a:hover, .contact-office ul li a:hover {
+.footer-content ul li a:hover,
+.contact-office ul li a:hover {
   color: var(--secondary-color);
 }
 
@@ -611,7 +620,9 @@ nav {
   padding: 10px;
 }
 
-.about-banner, .travel-packages-banner, .contact-banner {
+.about-banner,
+.travel-packages-banner,
+.contact-banner {
   background-image: url('./assets/aboutBanner.png');
   background-size: cover;
   background-position: center;
@@ -628,7 +639,7 @@ nav {
   font-weight: 600;
 }
 
-.contact-banner{
+.contact-banner {
   background-image: url('./assets/contact.png');
   justify-content: center;
   align-items: center;
@@ -1128,7 +1139,7 @@ nav {
   font-size: 20px;
 }
 
-.cruise-itinerary-day{
+.cruise-itinerary-day {
   color: var(--secondary-color) !important;
 }
 
@@ -1207,12 +1218,12 @@ nav {
   font-weight: 500;
 }
 
-.help-form form textarea{
+.help-form form textarea {
   height: 120px;
   resize: vertical;
 }
 
-.help-form form button{
+.help-form form button {
   width: 40%;
   padding: 12px;
   border-radius: 8px;
@@ -1224,12 +1235,12 @@ nav {
   cursor: pointer;
 }
 
-.help-form form button:hover{
+.help-form form button:hover {
   background: var(--blur-color-2);
   color: var(--tertiary-color);
 }
 
-.travel-packages-nav{
+.travel-packages-nav {
   background-color: var(--blur-color-2);
   padding: 10px 24px;
   border-radius: 16px;
@@ -1237,7 +1248,7 @@ nav {
   margin-top: 40px;
 }
 
-.travel-packages-nav ul{
+.travel-packages-nav ul {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -1247,7 +1258,7 @@ nav {
   margin: 0;
 }
 
-.travel-packages-nav ul li{
+.travel-packages-nav ul li {
   display: flex;
   align-items: center;
   gap: 24px;
@@ -1256,7 +1267,7 @@ nav {
   color: var(--tertiary-color);
 }
 
-.travel-packages-nav ul li button{
+.travel-packages-nav ul li button {
   background: none;
   border: none;
   font: inherit;
@@ -1267,17 +1278,17 @@ nav {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.travel-packages-nav ul li button:hover{
+.travel-packages-nav ul li button:hover {
   background-color: var(--blur-color-2);
   color: var(--secondary-color);
 }
 
-.travel-packages-nav ul li button.active{
+.travel-packages-nav ul li button.active {
   background-color: var(--secondary-color);
   color: #fff;
 }
 
-.travel-packages-nav hr{
+.travel-packages-nav hr {
   border: 1px solid var(--tertiary-color);
   margin: 12px 0;
   padding: 0;
@@ -1360,11 +1371,12 @@ nav {
   text-align: left;
 }
 
-.travel-package-card-body img{
+.travel-package-card-body img {
   border-radius: 16px;
 }
+
 /* glassy border around the content */
-.travel-package-card-body-content{
+.travel-package-card-body-content {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   padding: 20px;
@@ -1443,7 +1455,7 @@ nav {
   right: 8px;
 }
 
-.contact-content{
+.contact-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
@@ -1548,4 +1560,54 @@ nav {
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Fixed WhatsApp "Chat With Us" button - transparent glossy */
+.whatsapp-chat-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px 0 6px;
+  height: 42px;
+  min-width: 160px;
+  border-radius: 21px;
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.75) 0%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(230, 240, 235, 0.5) 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  text-decoration: none;
+  color: #222;
+  font-size: 15px;
+  font-weight: 500;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.whatsapp-chat-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  color: #222;
+}
+
+.whatsapp-chat-btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  color: #25d366;
+}
+
+.whatsapp-chat-btn-text {
+  white-space: nowrap;
 }
