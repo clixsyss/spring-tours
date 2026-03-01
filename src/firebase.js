@@ -8,7 +8,7 @@
 
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
-import { getFirestore, collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
+import { getFirestore, collection, doc, getDoc, getDocs, query, where, orderBy } from "firebase/firestore";
 
 // Option A: use environment variables (recommended)
 const firebaseConfig = {
@@ -29,6 +29,7 @@ export const storage = getStorage(app);
 export const db = getFirestore(app);
 
 export const TRAVEL_PACKAGES_COLLECTION = "travelPackages";
+export const CRUISE_SHIPS_COLLECTION = "cruiseShips";
 
 /** Categories matching the Travel Packages nav (and dashboard dropdown). */
 export const PACKAGE_CATEGORIES = [
@@ -64,6 +65,32 @@ export async function getTravelPackageById(id) {
   if (!id) return null;
   const d = await getDoc(doc(db, TRAVEL_PACKAGES_COLLECTION, id));
   return d.exists() ? { id: d.id, ...d.data() } : null;
+}
+
+/**
+ * Fetch all cruise ships from Firestore, sorted by order.
+ * @returns {Promise<Array<{ id: string, slug: string, title: string, description: string, imageURL: string, ... }>>}
+ */
+export async function getCruiseShips() {
+  const col = collection(db, CRUISE_SHIPS_COLLECTION);
+  const q = query(col, orderBy("order", "asc"));
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
+
+/**
+ * Fetch a single cruise ship by URL slug.
+ * @param {string} slug - e.g. "s-s-sphinx"
+ * @returns {Promise<{ id: string, slug: string, title: string, ... } | null>}
+ */
+export async function getCruiseBySlug(slug) {
+  if (!slug) return null;
+  const col = collection(db, CRUISE_SHIPS_COLLECTION);
+  const q = query(col, where("slug", "==", slug));
+  const snapshot = await getDocs(q);
+  if (snapshot.empty) return null;
+  const d = snapshot.docs[0];
+  return { id: d.id, ...d.data() };
 }
 
 /**

@@ -7,9 +7,7 @@ import Home from './pages/Home';
 import CruiseShips from './pages/CruiseShips';
 import TravelPackages from './pages/TravelPackages';
 import TransportFleets from './pages/TransportFleets';
-import Sphinx from './pages/cruises/Sphinx';
-import Medea from './pages/cruises/Medea';
-import Miriam from './pages/cruises/Miriam';
+import CruiseDetail from './pages/CruiseDetail';
 import About from './pages/About';
 import Mice from './pages/Mice';
 import ScrollToTop from './components/ScrollToTop';
@@ -75,7 +73,7 @@ function AnimatedRoutes() {
           }
         />
         <Route
-          path="/cruises/s-s-sphinx"
+          path="/cruises/:slug"
           element={
             <motion.div
               variants={pageVariants}
@@ -84,35 +82,7 @@ function AnimatedRoutes() {
               exit="exit"
               transition={pageTransition}
             >
-              <Sphinx />
-            </motion.div>
-          }
-        />
-        <Route
-          path="/cruises/m-s-medea"
-          element={
-            <motion.div
-              variants={pageVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              transition={pageTransition}
-            >
-              <Medea />
-            </motion.div>
-          }
-        />
-        <Route
-          path="/cruises/m-s-miriam"
-          element={
-            <motion.div
-              variants={pageVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              transition={pageTransition}
-            >
-              <Miriam />
+              <CruiseDetail />
             </motion.div>
           }
         />

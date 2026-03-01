@@ -1176,11 +1176,6 @@ nav {
   align-items: start;
 }
 
-/* this takes two thirds of the grid by default */
-.cruise-itinerary-tab-panel {
-  grid-column: 1 / span 2;
-}
-
 /* this takes the one third width of the grid */
 .help-form {
   margin: 0 auto;

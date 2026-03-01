@@ -1,93 +1,82 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { getCruiseShips } from "../firebase";
 
-const CRUISES = [
-    {
-        id: "sphinx-1",
-        title: "S/S Sphinx",
-        description:
-            "Spring Tours started building Nile boats 33 years ago. With every boat built, a new feature or design was added to achieve not only the elegance in style but also the maximum comfort we need for our valued guests. In 2021, Spring Tours inaugurated the Super Ship Sphinx.",
-        imageClass: "cruise-card-1",
-        path: "/cruises/s-s-sphinx",
-    },
-    {
-        id: "sphinx-2",
-        title: "M/S Medea",
-        description:
-            "This boat has been completely reconstructed in 2024 with complete overhaul of all engines, generators and air conditioning system. The new lavish furniture not only ensures the maximum comfort but a combination of stunning colors that add to the serenity and sophistication of this 5 star Nile boat.",
-        imageClass: "cruise-card-2",
-        path: "/cruises/m-s-medea",
-    },
-    {
-        id: "sphinx-3",
-        title: "M/S Miriam",
-        description:
-            "The MS Miriam cruise boat was completely overhauled in 2023 to reflect both the unique style of Egyptian hospitality combined with  the contemporary comforts and luxury amenities of modern river cruise boats, all while maintaining our attention to eco-friendliness.",
-        imageClass: "cruise-card-3",
-        path: "/cruises/m-s-miriam",
-    },
-    {
-        id: "sphinx-4",
-        title: "M/S Tosca",
-        description:
-            "Luxury Defined. Inaugurated in 2009, M/ S Tosca offers old world elegance and sophistication blend in perfect harmony with modern amenities and comforts.This vessel is decorated by the renowned interior design team responsible for furnishing the prestigious, ",
-        imageClass: "cruise-card-4",
-        path: "/cruises/m-s-tosca",
-    },
-    {
-        id: "sphinx-5",
-        title: "M/S La Traviata",
-        description:
-            "M/S La Traviata has proved be a long term favorite with many regular Nile cruise guests.The cozy restaurant on the lower deck serves 88 guests and serves both – international and Egyptian cuisine. Lounge bar with dance floor and music system for evening entertainment.",
-        imageClass: "cruise-card-5",
-        path: "/cruises/m-s-la-traviata",
-    },
-    {
-        id: "sphinx-6",
-        title: "S/S Karim",
-        description:
-            "Built in 1917, this historic vessel was originally used by King Fuad I of Egypt and then by his son King Farouk. After the Egyptian revolution, the S/S Karim was used by the state and hosted President Gamal Abd El Nasser and later on President Anwar Al Sadat and his wife Gihan. ",
-        imageClass: "cruise-card-6",
-        path: "/cruises/s-s-sphinx",
-    },
-    {
-        id: "sphinx-7",
-        title: "Dahabiyaa Judi",
-        description:
-            "There is no better way to explore the beauty of the Nile than onboard a Dahabiyya, a comfortable Egyptian sailing boat with two sails. Europeans have been travelling the Nile with these traditional boats since the 19th century. It has a crew of 10.",
-        imageClass: "cruise-card-7",
-        path: "/cruises/s-s-sphinx",
-    },
-];
-
-const CRUISE_INDEX_BY_ID = CRUISES.reduce((acc, cruise, index) => {
-    acc[cruise.id] = index;
-    return acc;
-}, {});
 function CruiseShips() {
     const navigate = useNavigate();
+    const [cruises, setCruises] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [activeCruiseIndex, setActiveCruiseIndex] = useState(0);
 
-    const currentCruise = CRUISES[activeCruiseIndex];
-    const orderedCruises = [
-        ...CRUISES.slice(activeCruiseIndex),
-        ...CRUISES.slice(0, activeCruiseIndex),
-    ];
+    useEffect(() => {
+        let cancelled = false;
+        setLoading(true);
+        setError(null);
+        getCruiseShips()
+            .then((data) => {
+                if (!cancelled) {
+                    setCruises(Array.isArray(data) ? data : []);
+                    setActiveCruiseIndex(0);
+                }
+            })
+            .catch((err) => {
+                if (!cancelled) {
+                    console.error("Cruise ships fetch failed:", err);
+                    setError("Could not load cruise ships. Please try again.");
+                    setCruises([]);
+                }
+            })
+            .finally(() => {
+                if (!cancelled) setLoading(false);
+            });
+        return () => { cancelled = true; };
+    }, []);
+
+    const n = cruises.length;
+    const currentCruise = n ? cruises[activeCruiseIndex] : null;
+    const orderedCruises = n
+        ? [...cruises.slice(activeCruiseIndex), ...cruises.slice(0, activeCruiseIndex)]
+        : [];
 
     const goToCruise = (cruise) => {
-        navigate(cruise.path);
+        navigate(`/cruises/${cruise.slug}`);
     };
 
     const changeCruise = (direction) => {
         setActiveCruiseIndex((prev) => {
-            const lastIndex = CRUISES.length - 1;
-            if (direction === "left") {
-                return prev === 0 ? lastIndex : prev - 1;
-            }
+            const lastIndex = cruises.length - 1;
+            if (direction === "left") return prev === 0 ? lastIndex : prev - 1;
             return prev === lastIndex ? 0 : prev + 1;
         });
     };
+
+    if (loading) {
+        return (
+            <div className="cruises-container">
+                <p className="travel-packages-loading">Loading cruise ships…</p>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="cruises-container">
+                <p className="travel-packages-error">{error}</p>
+            </div>
+        );
+    }
+
+    if (n === 0) {
+        return (
+            <div className="cruises-container">
+                <h1>Discover Our Cruises</h1>
+                <p className="travel-packages-empty">No cruise ships added yet.</p>
+            </div>
+        );
+    }
+
     return (
         <div>
             <div className="cruises-container">
@@ -124,30 +113,28 @@ function CruiseShips() {
                         <div className="cruises-cards">
                             {orderedCruises.map((cruise) => {
                                 const isActive = cruise.id === currentCruise.id;
-                                const originalIndex = CRUISE_INDEX_BY_ID[cruise.id];
-
+                                const originalIndex = cruises.findIndex((c) => c.id === cruise.id);
+                                const cardStyle = cruise.imageURL
+                                    ? { backgroundImage: `url(${cruise.imageURL})` }
+                                    : undefined;
                                 return (
                                     <button
                                         key={cruise.id}
                                         type="button"
-                                        className={`cruise-card ${cruise.imageClass} ${isActive ? "is-active" : ""}`}
-                                        onClick={() =>
-                                            setActiveCruiseIndex(
-                                                typeof originalIndex === "number" ? originalIndex : 0
-                                            )
-                                        }
+                                        className={`cruise-card ${isActive ? "is-active" : ""}`}
+                                        style={cardStyle}
+                                        onClick={() => setActiveCruiseIndex(originalIndex >= 0 ? originalIndex : 0)}
                                         aria-label={cruise.title}
                                     />
                                 );
                             })}
                         </div>
                         <div className="cruises-dots">
-                            {CRUISES.map((cruise, index) => (
+                            {cruises.map((cruise, index) => (
                                 <button
                                     key={`${cruise.id}-dot`}
                                     type="button"
-                                    className={`cruise-dot ${index === activeCruiseIndex ? "is-active" : ""
-                                        }`}
+                                    className={`cruise-dot ${index === activeCruiseIndex ? "is-active" : ""}`}
                                     onClick={() => setActiveCruiseIndex(index)}
                                     aria-label={`Go to slide ${index + 1}`}
                                 />
