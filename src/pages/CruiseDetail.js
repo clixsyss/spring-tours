@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { getCruiseBySlug, listFolderImageUrls } from "../firebase";
+import Spinner from "../components/Spinner";
 
 const INITIAL_VISIBLE_GALLERY_COUNT = 7;
 
@@ -9,6 +10,7 @@ function CruiseDetail() {
     const { slug } = useParams();
     const [cruise, setCruise] = useState(null);
     const [images, setImages] = useState([]);
+    const [galleryLoading, setGalleryLoading] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -58,25 +60,30 @@ function CruiseDetail() {
             : null;
         if (uploaded) {
             setImages(uploaded);
+            setGalleryLoading(false);
             return;
         }
-        if (!cruise?.galleryFolder) return;
+        if (!cruise?.galleryFolder) {
+            setGalleryLoading(false);
+            return;
+        }
         let cancelled = false;
+        setGalleryLoading(true);
         listFolderImageUrls(cruise.galleryFolder)
             .then((urls) => {
                 if (!cancelled) setImages(urls);
             })
             .catch(() => { })
-            .finally(() => { });
+            .finally(() => {
+                if (!cancelled) setGalleryLoading(false);
+            });
         return () => { cancelled = true; };
     }, [cruise?.galleryFolder, cruise?.galleryImageURLs]);
 
     if (loading) {
         return (
             <div className="content-container">
-                <div className="cruise-gallery-loading">
-                    <p className="cruise-gallery-loading-text">Loading…</p>
-                </div>
+                <Spinner className="loading-spinner-block" label="Loading cruise…" />
             </div>
         );
     }
@@ -125,6 +132,12 @@ function CruiseDetail() {
                     <div className="cruise-hero-placeholder">{cruise.title}</div>
                 )}
             </div>
+
+            {galleryLoading && (
+                <div className="cruise-gallery-loading">
+                    <Spinner label="Loading gallery…" />
+                </div>
+            )}
 
             {hasImages && (
                 <div className={`cruise-gallery ${showAll ? "is-expanded" : ""}`}>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { listFolderImageUrls } from "../firebase";
+import Spinner from "../components/Spinner";
 
 function TransportFleets() {
     const [imageUrls, setImageUrls] = useState([]);
@@ -37,8 +38,8 @@ function TransportFleets() {
             <div>
                 <div className="content-container">
                     <div className="mice-media-container">
-                        <div className="mice-media-main" style={{ backgroundImage: "none", background: "#eee" }}>
-                            <div className="mice-media-title">Loading gallery…</div>
+                        <div className="mice-media-main" style={{ backgroundImage: "none", background: "#eee", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            <Spinner label="Loading gallery…" />
                         </div>
                     </div>
                 </div>

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { getTravelPackageById } from '../firebase';
+import Spinner from '../components/Spinner';
 
 function TravelPackagesDetails() {
     const { id } = useParams();
@@ -56,7 +57,7 @@ function TravelPackagesDetails() {
     if (loading) {
         return (
             <div className="content-container">
-                <p className="travel-packages-loading">Loading package…</p>
+                <Spinner className="loading-spinner-block" label="Loading package…" />
             </div>
         );
     }

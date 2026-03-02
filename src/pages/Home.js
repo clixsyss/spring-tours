@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { FaClock, FaArrowLeft, FaArrowRight, FaStar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { getCruiseShips } from "../firebase";
+import Spinner from "../components/Spinner";
 
 import logo from "../assets/logo.webp";
 import verynile from "../assets/home/verynile.png";
@@ -93,7 +94,7 @@ function Home() {
 
             <div className="cruises-container">
                 <h1>Discover Our Cruises</h1>
-                {cruisesLoading && <p className="travel-packages-loading">Loading cruise ships…</p>}
+                {cruisesLoading && <div className="loading-spinner-block"><Spinner label="Loading cruise ships…" /></div>}
                 {cruisesError && <p className="travel-packages-error">{cruisesError}</p>}
                 {!cruisesLoading && !cruisesError && n > 0 && (
                     <div className="cruises-layout">

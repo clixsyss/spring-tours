@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { getCruiseShips } from "../firebase";
+import Spinner from "../components/Spinner";
 
 function CruiseShips() {
     const navigate = useNavigate();
@@ -55,7 +56,7 @@ function CruiseShips() {
     if (loading) {
         return (
             <div className="cruises-container">
-                <p className="travel-packages-loading">Loading cruise ships…</p>
+                <Spinner className="loading-spinner-block" label="Loading cruise ships…" />
             </div>
         );
     }

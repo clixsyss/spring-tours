@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { listFolderImageUrls } from "../../firebase";
+import Spinner from "../../components/Spinner";
 
 import restaurantIcon from "../../assets/icons/restaurants.svg";
 import receptionIcon from "../../assets/icons/reception.svg";
@@ -105,11 +106,7 @@ function Miriam() {
 
             {loading && (
                 <div className="cruise-gallery-loading">
-                    <div className="cruise-gallery-spinner" aria-hidden="true" />
-                    <div className="cruise-gallery-loading-bar">
-                        <div className="cruise-gallery-loading-bar-fill" />
-                    </div>
-                    <p className="cruise-gallery-loading-text">Loading gallery…</p>
+                    <Spinner label="Loading gallery…" />
                 </div>
             )}
 

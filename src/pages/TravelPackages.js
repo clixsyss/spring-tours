@@ -2,6 +2,7 @@ import { useState, useEffect, Fragment } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { getTravelPackages, PACKAGE_CATEGORIES } from "../firebase";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../components/Spinner";
 function TravelPackages() {
     const [packages, setPackages] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("All Tours");
@@ -68,7 +69,7 @@ function TravelPackages() {
                     </ul>
                 </div>
 
-                {loading && <p className="travel-packages-loading">Loading packages…</p>}
+                {loading && <Spinner className="loading-spinner-block" label="Loading packages…" />}
 
                 {error && <p className="travel-packages-error">{error}</p>}
 
