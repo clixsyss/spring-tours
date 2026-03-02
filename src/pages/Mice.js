@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const MICE_MEDIA = [
@@ -17,8 +17,18 @@ const MICE_MEDIA = [
 
 function Mice() {
     const [activeIndex, setActiveIndex] = useState(0);
+    const thumbsTrackRef = useRef(null);
 
     const currentItem = MICE_MEDIA[activeIndex];
+
+    useEffect(() => {
+        const track = thumbsTrackRef.current;
+        if (!track) return;
+        const activeThumb = track.children[activeIndex];
+        if (activeThumb) {
+            activeThumb.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+        }
+    }, [activeIndex]);
 
     const changeSlide = (direction) => {
         setActiveIndex((prev) => {
@@ -48,7 +58,7 @@ function Mice() {
                         >
                             <FaArrowLeft size={18} />
                         </button>
-                        <div className="mice-media-thumbs-track">
+                        <div className="mice-media-thumbs-track" ref={thumbsTrackRef}>
                             {MICE_MEDIA.map((item, index) => (
                                 <button
                                     key={item.id}
