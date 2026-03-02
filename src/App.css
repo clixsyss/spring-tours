@@ -197,7 +197,7 @@ nav {
 
 .cruises-container {
   margin-bottom: 60px;
-  padding-left: 80px;
+  padding: 80px;
 }
 
 .cruises-container>h1 {
@@ -915,14 +915,14 @@ nav {
   position: relative;
   border-radius: 32px;
   overflow: hidden;
-  height: 500px;
+  height: 600px;
 }
 
 .cruise-hero-image {
   width: 100%;
   display: block;
   object-fit: cover;
-  max-height: 500px;
+  max-height: 600px;
 }
 
 .cruise-hero-title {

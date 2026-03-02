@@ -13,7 +13,7 @@ function CruiseDetail() {
     const [galleryLoading, setGalleryLoading] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [selectedIndex, setSelectedIndex] = useState(0);
+    const [selectedIndex, setSelectedIndex] = useState(null);
     const [showAll, setShowAll] = useState(false);
     const [activeTab, setActiveTab] = useState("overview");
     const [activeItineraryTab, setActiveItineraryTab] = useState("");
@@ -98,8 +98,20 @@ function CruiseDetail() {
 
     const hasImages = images.length > 0;
     const heroImage = cruise.heroImageURL || (hasImages ? images[0] : null);
-    const safeSelectedIndex = !hasImages || selectedIndex < 0 || selectedIndex >= images.length ? 0 : selectedIndex;
-    const mainImage = hasImages ? images[safeSelectedIndex] : heroImage;
+    const hasHero = !!cruise.heroImageURL;
+    const safeSelectedIndex =
+        !hasImages || typeof selectedIndex !== "number" || selectedIndex < 0 || selectedIndex >= images.length
+            ? 0
+            : selectedIndex;
+
+    let mainImage;
+    if (hasHero) {
+        // Default to the hero image. If the user has clicked a gallery item (selectedIndex is a number),
+        // show that instead.
+        mainImage = hasImages && typeof selectedIndex === "number" ? images[safeSelectedIndex] : heroImage;
+    } else {
+        mainImage = hasImages ? images[safeSelectedIndex] : heroImage;
+    }
     const limitedImages = images.slice(0, INITIAL_VISIBLE_GALLERY_COUNT);
     const isExpandable = images.length > INITIAL_VISIBLE_GALLERY_COUNT;
     const visibleImages = showAll ? images : limitedImages;

@@ -15,12 +15,12 @@ const PLAN_CARDS = [
     { id: "plan2", title: "Coptic / Islamic Culture", imageClass: "plan-card-2" },
     { id: "plan3", title: "City Breaks", imageClass: "plan-card-3" },
     { id: "plan4", title: "Red Sea Beach Break", imageClass: "plan-card-4" },
-    { id: "plan5", title: "Cultural Heritage", imageClass: "plan-card-5" },
+    { id: "plan5", title: "Nile Cruises", imageClass: "plan-card-5" },
     { id: "plan6", title: "Egypt Express", imageClass: "plan-card-1" },
     { id: "plan7", title: "Coptic / Islamic Culture", imageClass: "plan-card-2" },
     { id: "plan8", title: "City Breaks", imageClass: "plan-card-3" },
     { id: "plan9", title: "Red Sea Beach Break", imageClass: "plan-card-4" },
-    { id: "plan10", title: "Cultural Heritage", imageClass: "plan-card-5" },
+    { id: "plan10", title: "Nile Cruises", imageClass: "plan-card-5" },
 ];
 
 function Home() {
