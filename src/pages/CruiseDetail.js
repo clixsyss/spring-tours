@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { getCruiseBySlug, listFolderImageUrls } from "../firebase";
 import Spinner from "../components/Spinner";
+import { submitContactForm } from "../api/contact";
 
 const INITIAL_VISIBLE_GALLERY_COUNT = 7;
 
@@ -17,6 +18,44 @@ function CruiseDetail() {
     const [showAll, setShowAll] = useState(false);
     const [activeTab, setActiveTab] = useState("overview");
     const [activeItineraryTab, setActiveItineraryTab] = useState("");
+    const [helpForm, setHelpForm] = useState({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+    });
+    const [helpSubmitting, setHelpSubmitting] = useState(false);
+    const [helpStatus, setHelpStatus] = useState(null);
+    const [helpStatusMessage, setHelpStatusMessage] = useState("");
+
+    const handleHelpChange = (e) => {
+        const { name, value } = e.target;
+        setHelpForm((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleHelpSubmit = async (e) => {
+        e.preventDefault();
+        if (helpSubmitting) return;
+        setHelpSubmitting(true);
+        setHelpStatus(null);
+        try {
+            await submitContactForm({
+                ...helpForm,
+                source: "cruise-detail",
+                cruiseSlug: slug,
+                cruiseTitle: cruise?.title || "",
+            });
+            setHelpStatus("success");
+            setHelpStatusMessage("Thank you, your message has been sent.");
+            setHelpForm({ name: "", email: "", phone: "", message: "" });
+        } catch (err) {
+            console.error("Cruise help form error:", err);
+            setHelpStatus("error");
+            setHelpStatusMessage("Sorry, we couldn't send your message. Please try again.");
+        } finally {
+            setHelpSubmitting(false);
+        }
+    };
 
     useEffect(() => {
         let cancelled = false;
@@ -324,13 +363,51 @@ function CruiseDetail() {
                                 <div className="help-form">
                                     <h2>Need Help?</h2>
                                     <p>Are you interested in our pricing, offers, and tailored arrangements?</p>
-                                    <form>
-                                        <input type="text" placeholder="Name" />
-                                        <input type="email" placeholder="Email" />
-                                        <input type="tel" placeholder="Phone" />
-                                        <textarea placeholder="Message" />
-                                        <button type="submit">Submit</button>
+                                    <form onSubmit={handleHelpSubmit}>
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            placeholder="Name"
+                                            value={helpForm.name}
+                                            onChange={handleHelpChange}
+                                            required
+                                        />
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            placeholder="Email"
+                                            value={helpForm.email}
+                                            onChange={handleHelpChange}
+                                            required
+                                        />
+                                        <input
+                                            type="tel"
+                                            name="phone"
+                                            placeholder="Phone"
+                                            value={helpForm.phone}
+                                            onChange={handleHelpChange}
+                                        />
+                                        <textarea
+                                            name="message"
+                                            placeholder="Message"
+                                            value={helpForm.message}
+                                            onChange={handleHelpChange}
+                                            required
+                                        />
+                                        <button type="submit" disabled={helpSubmitting}>
+                                            {helpSubmitting ? "Sending..." : "Submit"}
+                                        </button>
                                     </form>
+                                    {helpStatus === "success" && (
+                                        <p className="help-form-status help-form-status-success">
+                                            {helpStatusMessage}
+                                        </p>
+                                    )}
+                                    {helpStatus === "error" && (
+                                        <p className="help-form-status help-form-status-error">
+                                            {helpStatusMessage}
+                                        </p>
+                                    )}
                                     <p>We'll get back to you as soon as possible.</p>
                                 </div>
                             </div>

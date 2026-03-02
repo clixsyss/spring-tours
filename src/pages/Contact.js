@@ -1,8 +1,45 @@
 import { useState } from "react";
 import { FaMapMarkerAlt, FaPhone, FaFax, FaEnvelope } from "react-icons/fa";
+import { submitContactForm } from "../api/contact";
 
 function Contact() {
     const [mapLoading, setMapLoading] = useState(true);
+    const [contactForm, setContactForm] = useState({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+    });
+    const [contactSubmitting, setContactSubmitting] = useState(false);
+    const [contactStatus, setContactStatus] = useState(null);
+    const [contactStatusMessage, setContactStatusMessage] = useState("");
+
+    const handleContactChange = (e) => {
+        const { name, value } = e.target;
+        setContactForm((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleContactSubmit = async (e) => {
+        e.preventDefault();
+        if (contactSubmitting) return;
+        setContactSubmitting(true);
+        setContactStatus(null);
+        try {
+            await submitContactForm({
+                ...contactForm,
+                source: "contact-page",
+            });
+            setContactStatus("success");
+            setContactStatusMessage("Thank you, your message has been sent.");
+            setContactForm({ name: "", email: "", phone: "", message: "" });
+        } catch (err) {
+            console.error("Contact form error:", err);
+            setContactStatus("error");
+            setContactStatusMessage("Sorry, we couldn't send your message. Please try again.");
+        } finally {
+            setContactSubmitting(false);
+        }
+    };
 
     return (
         <div>
@@ -47,13 +84,51 @@ function Contact() {
                     <div>
                         <div className="help-form">
                             <h2>Contact Us</h2>
-                            <form>
-                                <input type="text" placeholder="Name" />
-                                <input type="email" placeholder="Email" />
-                                <input type="tel" placeholder="Phone" />
-                                <textarea placeholder="Message" />
-                                <button type="submit">Submit</button>
+                            <form onSubmit={handleContactSubmit}>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    placeholder="Name"
+                                    value={contactForm.name}
+                                    onChange={handleContactChange}
+                                    required
+                                />
+                                <input
+                                    type="email"
+                                    name="email"
+                                    placeholder="Email"
+                                    value={contactForm.email}
+                                    onChange={handleContactChange}
+                                    required
+                                />
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    placeholder="Phone"
+                                    value={contactForm.phone}
+                                    onChange={handleContactChange}
+                                />
+                                <textarea
+                                    name="message"
+                                    placeholder="Message"
+                                    value={contactForm.message}
+                                    onChange={handleContactChange}
+                                    required
+                                />
+                                <button type="submit" disabled={contactSubmitting}>
+                                    {contactSubmitting ? "Sending..." : "Submit"}
+                                </button>
                             </form>
+                            {contactStatus === "success" && (
+                                <p className="help-form-status help-form-status-success">
+                                    {contactStatusMessage}
+                                </p>
+                            )}
+                            {contactStatus === "error" && (
+                                <p className="help-form-status help-form-status-error">
+                                    {contactStatusMessage}
+                                </p>
+                            )}
                             <p>We'll get back to you as soon as possible.</p>
                         </div>
                     </div>

@@ -73,14 +73,23 @@ function Home() {
     };
 
     const planCarouselRef = useRef(null);
+    const [planActiveIndex, setPlanActiveIndex] = useState(0);
 
     const scrollPlanCarousel = (direction) => {
         const el = planCarouselRef.current;
-        if (!el) return;
-        const cardWidth = el.querySelector(".plan-carousel-item")?.offsetWidth ?? 320;
-        const gap = 24;
-        const scrollAmount = (cardWidth + gap) * (direction === "left" ? -1 : 1);
-        el.scrollBy({ left: scrollAmount, behavior: "smooth" });
+        if (el) {
+            const cardWidth = el.querySelector(".plan-carousel-item")?.offsetWidth ?? 320;
+            const gap = 24;
+            const scrollAmount = (cardWidth + gap) * (direction === "left" ? -1 : 1);
+            el.scrollBy({ left: scrollAmount, behavior: "smooth" });
+        }
+        setPlanActiveIndex((prev) => {
+            const last = PLAN_CARDS.length - 1;
+            if (direction === "left") {
+                return prev === 0 ? last : prev - 1;
+            }
+            return prev === last ? 0 : prev + 1;
+        });
     };
 
     return (
@@ -222,10 +231,10 @@ function Home() {
                             <FaArrowRight size={20} />
                         </button>
                         <div className="plan-carousel-track" ref={planCarouselRef}>
-                            {PLAN_CARDS.map((card) => (
+                            {PLAN_CARDS.map((card, index) => (
                                 <div
                                     key={card.id}
-                                    className={`plan-carousel-item ${card.imageClass}`}
+                                    className={`plan-carousel-item ${card.imageClass} ${index === planActiveIndex ? "is-active" : ""}`}
                                 >
                                     <div className="plan-carousel-item-overlay">
                                         <h4>{card.title}</h4>
