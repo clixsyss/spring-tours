@@ -1,4 +1,5 @@
 import { useState, useEffect, Fragment } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { getTravelPackages, PACKAGE_CATEGORIES } from "../firebase";
 import { useNavigate } from "react-router-dom";
@@ -111,19 +112,32 @@ function TravelPackages() {
                                 <img src={imgSrc(packages[prevIndex])} alt="" />
                             </div>
 
-                            <div className="travel-package-card travel-package-card-center">
-                                <div className="travel-package-card-body">
-                                    <img src={imgSrc(activePackage)} alt={activePackage.title} />
-                                    <div className="travel-package-card-body-content">
-                                        <h2>{activePackage.title}</h2>
-                                        <p>{activePackage.description}</p>
-                                        <div className="travel-package-code">Code: {activePackage.code}</div>
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={activePackage.id}
+                                    className="travel-package-card travel-package-card-center"
+                                    initial={{ opacity: 0, y: 12 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -12 }}
+                                    transition={{ duration: 0.25, ease: "easeOut" }}
+                                >
+                                    <div className="travel-package-card-body">
+                                        <img src={imgSrc(activePackage)} alt={activePackage.title} />
+                                        <div className="travel-package-card-body-content">
+                                            <h2>{activePackage.title}</h2>
+                                            <p>{activePackage.description}</p>
+                                            <div className="travel-package-code">Code: {activePackage.code}</div>
+                                        </div>
                                     </div>
-                                </div>
-                                <button type="button" className="btn travel-package-explore" onClick={() => navigate(`/travel-packages/details/${activePackage.id}`)}>
-                                    Explore Now
-                                </button>
-                            </div>
+                                    <button
+                                        type="button"
+                                        className="btn travel-package-explore"
+                                        onClick={() => navigate(`/travel-packages/details/${activePackage.id}`)}
+                                    >
+                                        Explore Now
+                                    </button>
+                                </motion.div>
+                            </AnimatePresence>
 
                             <div className="travel-package-card travel-package-card-right">
                                 <img src={imgSrc(packages[nextIndex])} alt="" />
