@@ -37,6 +37,10 @@ nav {
   color: var(--tertiary-color);
 }
 
+.nav-overlay {
+  display: none;
+}
+
 .menu ul {
   margin: 0;
   padding: 0;
@@ -1297,6 +1301,10 @@ nav {
   margin-top: 40px;
 }
 
+.travel-packages-nav-mobile {
+  display: none;
+}
+
 .travel-packages-nav ul {
   display: flex;
   flex-direction: row;
@@ -1343,6 +1351,38 @@ nav {
   padding: 0;
 }
 
+.travel-packages-select {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  margin: 24px auto 0;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: none;
+  background: var(--blur-color-2);
+  color: var(--tertiary-color);
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.75) 0%,
+      rgba(214, 242, 228, 0.39) 50%,
+      rgb(230, 240, 235) 100%),
+    url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23222222' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 12px 8px;
+}
+
+.travel-packages-select:focus {
+  outline: none;
+}
+
 .travel-packages-loading,
 .travel-packages-empty,
 .travel-packages-error {
@@ -1369,6 +1409,16 @@ nav {
   justify-content: center;
   gap: 24px;
   height: auto;
+}
+
+@media (max-width: 900px) {
+  .travel-packages-nav {
+    display: none;
+  }
+
+  .travel-packages-nav-mobile {
+    display: block;
+  }
 }
 
 .travel-package-card {
@@ -1712,6 +1762,18 @@ nav {
     display: inline-flex;
   }
 
+  .nav-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    z-index: 9999998;
+    cursor: default;
+  }
+
   .menu {
     position: fixed;
     top: 0px;
@@ -1762,6 +1824,7 @@ nav {
 
   .cruises-container {
     padding: 30px;
+    margin-bottom: 0px;
   }
 
   .cruises-layout {
@@ -1925,7 +1988,7 @@ nav {
     width: 100%;
   }
 
-  .footer-content{
+  .footer-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
     flex-direction: column;
@@ -1933,24 +1996,105 @@ nav {
   }
 
   /* Three divs in the footer-content - Only the last divs in the footer-content should be side by side in two columns  and the first takes full space*/
-  .footer-content div:nth-child(1){
+  .footer-content div:nth-child(1) {
     grid-column: 1 / span 2;
   }
 
-  .footer-content div:nth-child(2){
+  .footer-content div:nth-child(2) {
     grid-column: 1 / span 1;
   }
 
-  .whatsapp-chat-btn-text{
+  .whatsapp-chat-btn-text {
     display: none;
   }
 
-  .whatsapp-chat-btn{
+  .whatsapp-chat-btn {
     min-width: 40px !important;
     height: 40px !important;
     padding: 21px 6px !important;
     border-radius: 50% !important;
     right: 20px;
     bottom: 20px;
+  }
+
+  .about-banner,
+  .travel-packages-banner,
+  .contact-banner {
+    height: 150px;
+    padding: 40px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .travel-packages-carousel {
+    margin: 20px auto;
+    width: 100%;
+    padding: 0;
+  }
+
+  .travel-packages-carousel {
+    padding: 0;
+    width: 100%;
+    margin: 40px auto;
+    overflow: visible;
+
+  }
+
+  .travel-packages-track {
+    gap: 0;
+  }
+
+  .travel-package-card-left,
+  .travel-package-card-right {
+    display: none;
+  }
+
+  .travel-package-card{
+    width: 100%;
+  }
+
+  .travel-package-card img{
+    width: 100%;
+  }
+
+  .travel-packages-arrow-left{
+    left: -12px
+  }
+
+  .travel-packages-arrow-right{
+    right: -12px;
+  }
+
+  .history-content{
+    padding: 0;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .history-content p{
+    font-size: 14px;
+  }
+
+  .mission-vision-content{
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0;
+  }
+
+  .mission-container img, .vision-container img{
+    width: 80px;
+  }
+
+  .mission-vision-container{
+    width: 100%;
   }
 }

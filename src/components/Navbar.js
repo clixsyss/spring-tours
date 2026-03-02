@@ -99,6 +99,15 @@ function Navbar() {
           </li>
         </ul>
       </div>
+
+      {isOpen && (
+        <button
+          type="button"
+          className="nav-overlay"
+          onClick={closeMenu}
+          aria-label="Close navigation"
+        />
+      )}
     </nav>
   );
 }

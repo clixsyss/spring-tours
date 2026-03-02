@@ -8,10 +8,10 @@ function Footer() {
                 <div className="footer-top">
                     <img src={logo} alt="Spring Tours Logo" className="footer-logo" />
                     <div className="social-media">
-                        <a href="https://www.facebook.com/springtours.eg" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.facebook.com/share/1CZNwnsURv/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
                             <FaFacebookF size={30} />
                         </a>
-                        <a href="https://www.instagram.com/springtours.eg" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.instagram.com/springtoursegypt?igsh=MWdoYjRnOHVwaXh1YQ%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer">
                             <FaInstagram size={30} />
                         </a>
                         <a href="https://wa.me/201000000000" target="_blank" rel="noopener noreferrer">

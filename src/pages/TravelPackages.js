@@ -69,6 +69,20 @@ function TravelPackages() {
                     </ul>
                 </div>
 
+                <div className="travel-packages-nav-mobile">
+                    <select
+                        value={selectedCategory}
+                        onChange={(e) => setSelectedCategory(e.target.value)}
+                        className="travel-packages-select"
+                    >
+                        {PACKAGE_CATEGORIES.map((cat) => (
+                            <option key={cat} value={cat}>
+                                {cat}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
                 {loading && <Spinner className="loading-spinner-block" label="Loading packages…" />}
 
                 {error && <p className="travel-packages-error">{error}</p>}
