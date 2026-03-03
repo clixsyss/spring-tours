@@ -75,28 +75,34 @@ function CruiseShips() {
 
     // Load background gallery images for the active cruise (updates when cruise changes)
     useEffect(() => {
-        if (!currentCruise) {
+        const cruiseId = currentCruise?.id;
+        const title = currentCruise?.title || "";
+        const slug = (currentCruise?.slug || "").toLowerCase().trim();
+        const galleryFolder = currentCruise?.galleryFolder;
+        const galleryImageURLs = currentCruise?.galleryImageURLs;
+        const heroImageURL = currentCruise?.heroImageURL;
+        const imageURL = currentCruise?.imageURL;
+
+        if (!cruiseId) {
             setBgImages([]);
             setBgIndex(0);
             return;
         }
 
-        const cruiseId = currentCruise.id;
         const uploaded =
-            Array.isArray(currentCruise.galleryImageURLs) && currentCruise.galleryImageURLs.length > 0
-                ? currentCruise.galleryImageURLs
+            Array.isArray(galleryImageURLs) && galleryImageURLs.length > 0
+                ? galleryImageURLs
                 : null;
-        const fallback = currentCruise.heroImageURL || currentCruise.imageURL || null;
+        const fallback = heroImageURL || imageURL || null;
         const normalizedTitle =
-            (currentCruise.title || "")
+            title
                 .replace("M/S", "MS")
                 .replace(/\s+/g, " ")
                 .trim();
-        const slug = (currentCruise.slug || "").toLowerCase().trim();
 
         const resolvedFolder =
-            currentCruise.galleryFolder ||
-            CRUISE_GALLERY_FOLDERS[currentCruise.title] ||
+            galleryFolder ||
+            CRUISE_GALLERY_FOLDERS[title] ||
             CRUISE_GALLERY_FOLDERS[normalizedTitle] ||
             CRUISE_GALLERY_BY_SLUG[slug] ||
             null;

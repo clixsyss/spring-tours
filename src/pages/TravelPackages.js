@@ -38,8 +38,19 @@ function TravelPackages() {
     const n = packages.length;
     const prevIndex = n ? (activeIndex - 1 + n) % n : 0;
     const nextIndex = n ? (activeIndex + 1) % n : 0;
-    const goPrev = () => n && setActiveIndex((i) => (i - 1 + n) % n);
-    const goNext = () => n && setActiveIndex((i) => (i + 1) % n);
+    const [slideDirection, setSlideDirection] = useState(1);
+    const goPrev = () => {
+        if (n) {
+            setSlideDirection(-1);
+            setActiveIndex((i) => (i - 1 + n) % n);
+        }
+    };
+    const goNext = () => {
+        if (n) {
+            setSlideDirection(1);
+            setActiveIndex((i) => (i + 1) % n);
+        }
+    };
 
     const activePackage = packages[activeIndex];
     const imgSrc = (pkg) => pkg?.imageURL || pkg?.image;
@@ -112,14 +123,32 @@ function TravelPackages() {
                                 <img src={imgSrc(packages[prevIndex])} alt="" />
                             </div>
 
-                            <AnimatePresence mode="wait">
+                            <AnimatePresence mode="sync" custom={slideDirection} initial={false}>
                                 <motion.div
                                     key={activePackage.id}
                                     className="travel-package-card travel-package-card-center"
-                                    initial={{ opacity: 0, y: 12 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -12 }}
-                                    transition={{ duration: 0.25, ease: "easeOut" }}
+                                    custom={slideDirection}
+                                    initial={(dir) => ({
+                                        x: dir === 1 ? 24 : -24,
+                                        opacity: 0.82,
+                                        scale: 0.98,
+                                    })}
+                                    animate={{
+                                        x: 0,
+                                        opacity: 1,
+                                        scale: [0.98, 1.01, 1],
+                                    }}
+                                    exit={(dir) => ({
+                                        x: dir === 1 ? -24 : 24,
+                                        opacity: 0.82,
+                                        scale: 0.98,
+                                    })}
+                                    transition={{
+                                        duration: 0.48,
+                                        ease: [0.25, 0.46, 0.45, 0.94],
+                                        times: [0, 0.55, 1],
+                                    }}
+                                    style={{ willChange: "transform, opacity" }}
                                 >
                                     <div className="travel-package-card-body">
                                         <img src={imgSrc(activePackage)} alt={activePackage.title} />
