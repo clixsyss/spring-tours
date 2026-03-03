@@ -226,6 +226,8 @@ nav {
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
   gap: 40px;
   align-items: center;
+  position: relative;
+  z-index: 2;
 }
 
 .cruises-copy h2 {
@@ -569,8 +571,9 @@ nav {
 
 .footer {
   background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 1) 0%,
       #EEEEEE 10%,
-      #F9F9F9 100%);
+        #F9F9F9 100%);
   padding: 40px 100px;
 }
 
@@ -1749,6 +1752,63 @@ nav {
   white-space: nowrap;
 }
 
+.cruises-ships-layout {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: #fff;
+}
+
+.cruises-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.cruises-hero-bg-layer {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.78;
+}
+
+/* Overall white wash so the whole background looks faded */
+.cruises-hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.42);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Gradient that fades the whole area into white at top and bottom */
+.cruises-ships-layout::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0) 32%,
+      rgba(255, 255, 255, 0) 68%,
+      rgba(255, 255, 255, 1) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.cruises-ships-layout>h1 {
+  position: relative;
+  z-index: 2;
+}
+
 @media (max-width: 900px) {
   nav {
     padding: 16px 20px;
@@ -2058,152 +2118,155 @@ nav {
     display: none;
   }
 
-  .travel-package-card{
+  .travel-package-card {
     width: 100%;
   }
 
-  .travel-package-card img{
+  .travel-package-card img {
     width: 100%;
   }
 
-  .travel-packages-arrow-left{
+  .travel-packages-arrow-left {
     left: -12px
   }
 
-  .travel-packages-arrow-right{
+  .travel-packages-arrow-right {
     right: -12px;
   }
 
-  .history-content{
+  .history-content {
     padding: 0;
     grid-template-columns: 1fr;
     gap: 20px;
   }
 
-  .history-content p{
+  .history-content p {
     font-size: 14px;
   }
 
-  .mission-vision-content{
+  .mission-vision-content {
     grid-template-columns: 1fr;
     gap: 20px;
     padding: 0;
   }
 
-  .mission-container img, .vision-container img{
+  .mission-container img,
+  .vision-container img {
     width: 80px;
   }
 
-  .mission-vision-container{
+  .mission-vision-container {
     width: 100%;
   }
 
-  .mice-media-main{
+  .mice-media-main {
     height: 200px;
   }
 
-  .mice-media-thumbs-track{
+  .mice-media-thumbs-track {
     padding: 10px 20px;
   }
-  .mice-media-arrow-left{
+
+  .mice-media-arrow-left {
     left: -8px;
     z-index: 9999;
   }
 
-  .mice-media-arrow-right{
+  .mice-media-arrow-right {
     right: -8px;
   }
 
-  .mice-content-container{
+  .mice-content-container {
     width: 100%;
   }
 
-  .mice-content-container h2{
+  .mice-content-container h2 {
     font-size: 20px;
   }
 
-  .mice-content-container p{
+  .mice-content-container p {
     font-size: 14px;
   }
 
-  .contact-content{
+  .contact-content {
     grid-template-columns: 1fr;
     padding: 0;
   }
 
-  .contact-locations-grid{
+  .contact-locations-grid {
     grid-template-columns: 1fr;
     padding: 0;
     gap: 0px;
   }
 
-  .contact-map-wrap{
+  .contact-map-wrap {
     padding: 0;
   }
 
-  .help-form{
+  .help-form {
     padding: 20px;
   }
 
-  .cruise-itinerary-content{
+  .cruise-itinerary-content {
     grid-template-columns: 1fr;
     gap: 20px;
   }
 
-  .help-form{
+  .help-form {
     grid-column: 1;
   }
 
-  .travel-packages-details-overview li, .travel-packages-details-itinerary li p{
+  .travel-packages-details-overview li,
+  .travel-packages-details-itinerary li p {
     font-size: 14px;
   }
 
-  .cruise-tabs{
+  .cruise-tabs {
     gap: 20px;
     margin: 20px 0;
     margin-top: 40px;
   }
 
-  .cruise-hero-image-wrapper{
+  .cruise-hero-image-wrapper {
     height: 200px;
   }
 
-  .cruise-gallery-item{
+  .cruise-gallery-item {
     flex: 1 1 120px;
     height: 100px;
   }
 
-  .cruise-gallery{
+  .cruise-gallery {
     gap: 10px;
     max-height: fit-content;
   }
 
-  .cruise-tabs button{
+  .cruise-tabs button {
     font-size: 14px;
   }
 
-  .cruise-overview{
+  .cruise-overview {
     grid-template-columns: 1fr;
     gap: 0px;
   }
 
-  .cruise-features-grid{
+  .cruise-features-grid {
     gap: 20px;
   }
 
-  .features02{
+  .features02 {
     width: 100%;
   }
 
-  .cruise-itinerary-tab-panel ol li{
+  .cruise-itinerary-tab-panel ol li {
     font-size: 18px;
   }
 
-  .cruise-itinerary-tab-panel li p{
+  .cruise-itinerary-tab-panel li p {
     font-size: 14px;
   }
 
-  .cruise-itinerary-tab-panel ul li{
+  .cruise-itinerary-tab-panel ul li {
     font-size: 14px;
   }
 }

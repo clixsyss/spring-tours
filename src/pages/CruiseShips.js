@@ -1,8 +1,37 @@
 import { useState, useEffect } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { getCruiseShips } from "../firebase";
+import { AnimatePresence, motion } from "framer-motion";
+import { getCruiseShips, listFolderImageUrls } from "../firebase";
 import Spinner from "../components/Spinner";
+
+// Map cruise titles to their Firebase Storage gallery folders (must match Storage folder names exactly)
+const CRUISE_GALLERY_FOLDERS = {
+    "Dahabiyaa Judi": "cruises/Dahabiyaa Judi",
+    "Dahabiya Judi": "cruises/Dahabiyaa Judi",
+    "MS LaTraviata": "cruises/MS LaTraviata",
+    "MS Medea": "cruises/MS Medea",
+    "M/S Medea": "cruises/MS Medea",
+    "MS Miriam": "cruises/MS Miriam",
+    "MS Tosca": "cruises/MS Tosca",
+    "SS Karim": "cruises/SS Karim",
+    "S/S Sphinx": "cruises/SS Sphinx",
+};
+
+// Fallback: map URL slug to gallery folder (in case Firestore title doesn't match)
+const CRUISE_GALLERY_BY_SLUG = {
+    "s-s-sphinx": "cruises/SS Sphinx",
+    "ss-sphinx": "cruises/SS Sphinx",
+    "ms-medea": "cruises/MS Medea",
+    "m-s-medea": "cruises/MS Medea",
+    "medea": "cruises/MS Medea",
+    "dahabiyaa-judi": "cruises/Dahabiyaa Judi",
+    "dahabiya-judi": "cruises/Dahabiyaa Judi",
+    "ms-miriam": "cruises/MS Miriam",
+    "ms-tosca": "cruises/MS Tosca",
+    "ms-latraviata": "cruises/MS LaTraviata",
+    "ss-karim": "cruises/SS Karim",
+};
 
 function CruiseShips() {
     const navigate = useNavigate();
@@ -10,6 +39,9 @@ function CruiseShips() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [activeCruiseIndex, setActiveCruiseIndex] = useState(0);
+    const [bgImages, setBgImages] = useState([]);
+    const [bgIndex, setBgIndex] = useState(0);
+    const [bgCache, setBgCache] = useState({});
 
     useEffect(() => {
         let cancelled = false;
@@ -40,6 +72,106 @@ function CruiseShips() {
     const orderedCruises = n
         ? [...cruises.slice(activeCruiseIndex), ...cruises.slice(0, activeCruiseIndex)]
         : [];
+
+    // Load background gallery images for the active cruise (updates when cruise changes)
+    useEffect(() => {
+        if (!currentCruise) {
+            setBgImages([]);
+            setBgIndex(0);
+            return;
+        }
+
+        const cruiseId = currentCruise.id;
+        const uploaded =
+            Array.isArray(currentCruise.galleryImageURLs) && currentCruise.galleryImageURLs.length > 0
+                ? currentCruise.galleryImageURLs
+                : null;
+        const fallback = currentCruise.heroImageURL || currentCruise.imageURL || null;
+        const normalizedTitle =
+            (currentCruise.title || "")
+                .replace("M/S", "MS")
+                .replace(/\s+/g, " ")
+                .trim();
+        const slug = (currentCruise.slug || "").toLowerCase().trim();
+
+        const resolvedFolder =
+            currentCruise.galleryFolder ||
+            CRUISE_GALLERY_FOLDERS[currentCruise.title] ||
+            CRUISE_GALLERY_FOLDERS[normalizedTitle] ||
+            CRUISE_GALLERY_BY_SLUG[slug] ||
+            null;
+
+        // Always show at least the fallback image for this cruise immediately when switching
+        const immediateImages = fallback ? [fallback] : [];
+        setBgImages(immediateImages);
+        setBgIndex(0);
+
+        if (uploaded) {
+            setBgImages(uploaded);
+            setBgCache((prev) => ({ ...prev, [cruiseId]: uploaded }));
+            return;
+        }
+
+        const cached = bgCache[cruiseId];
+        if (Array.isArray(cached) && cached.length > 0) {
+            setBgImages(cached);
+            setBgIndex(0);
+            return;
+        }
+
+        if (!resolvedFolder) {
+            setBgCache((prev) => ({ ...prev, [cruiseId]: immediateImages }));
+            return;
+        }
+
+        let cancelled = false;
+
+        listFolderImageUrls(resolvedFolder)
+            .then((urls) => {
+                if (cancelled) return;
+                const finalUrls =
+                    Array.isArray(urls) && urls.length > 0
+                        ? urls
+                        : fallback
+                            ? [fallback]
+                            : [];
+                setBgImages(finalUrls);
+                setBgIndex(0);
+                setBgCache((prev) => ({ ...prev, [cruiseId]: finalUrls }));
+            })
+            .catch(() => {
+                if (cancelled) return;
+                setBgCache((prev) => ({ ...prev, [cruiseId]: immediateImages }));
+            });
+
+        return () => {
+            cancelled = true;
+        };
+    }, [
+        currentCruise?.id,
+        currentCruise?.slug,
+        currentCruise?.title,
+        currentCruise?.galleryFolder,
+        currentCruise?.galleryImageURLs,
+        currentCruise?.heroImageURL,
+        currentCruise?.imageURL,
+        bgCache,
+    ]);
+
+    // Rotate background image every 5 seconds
+    useEffect(() => {
+        if (!bgImages || bgImages.length <= 1) {
+            setBgIndex(0);
+            return;
+        }
+
+        setBgIndex(0);
+        const id = setInterval(() => {
+            setBgIndex((prev) => (prev + 1) % bgImages.length);
+        }, 5000);
+
+        return () => clearInterval(id);
+    }, [bgImages]);
 
     const goToCruise = (cruise) => {
         navigate(`/cruises/${cruise.slug}`);
@@ -80,7 +212,22 @@ function CruiseShips() {
 
     return (
         <div>
-            <div className="cruises-container">
+            <div className="cruises-container cruises-ships-layout">
+                <div className="cruises-hero-bg">
+                    <AnimatePresence mode="wait">
+                        {bgImages.length > 0 && (
+                            <motion.div
+                                key={bgImages[bgIndex] || "cruise-hero-fallback"}
+                                className="cruises-hero-bg-layer"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 1.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+                                style={{ backgroundImage: `url(${bgImages[bgIndex]})` }}
+                            />
+                        )}
+                    </AnimatePresence>
+                </div>
                 <h1>Discover Our Cruises</h1>
                 <div className="cruises-layout">
                     <div className="cruises-copy">
