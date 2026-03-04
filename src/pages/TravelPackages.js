@@ -2,15 +2,26 @@ import { useState, useEffect, Fragment } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { getTravelPackages, PACKAGE_CATEGORIES } from "../firebase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Spinner from "../components/Spinner";
 function TravelPackages() {
+    const [searchParams] = useSearchParams();
+    const categoryFromUrl = searchParams.get("category");
+    const initialCategory =
+        categoryFromUrl && PACKAGE_CATEGORIES.includes(categoryFromUrl) ? categoryFromUrl : "All Tours";
     const [packages, setPackages] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState("All Tours");
+    const [selectedCategory, setSelectedCategory] = useState(initialCategory);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (categoryFromUrl && PACKAGE_CATEGORIES.includes(categoryFromUrl) && selectedCategory !== categoryFromUrl) {
+            setSelectedCategory(categoryFromUrl);
+        }
+    }, [categoryFromUrl, selectedCategory]);
+
     useEffect(() => {
         let cancelled = false;
         setLoading(true);

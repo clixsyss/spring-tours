@@ -10,17 +10,18 @@ import testimonial01 from "../assets/home/test01.png";
 import testimonial02 from "../assets/home/test02.png";
 import testimonial03 from "../assets/home/test03.png";
 
+/** Category values must match PACKAGE_CATEGORIES in firebase.js for Travel Packages filter. */
 const PLAN_CARDS = [
-    { id: "plan1", title: "Egypt Express", imageClass: "plan-card-1" },
-    { id: "plan2", title: "Coptic / Islamic Culture", imageClass: "plan-card-2" },
-    { id: "plan3", title: "City Breaks", imageClass: "plan-card-3" },
-    { id: "plan4", title: "Red Sea Beach Break", imageClass: "plan-card-4" },
-    { id: "plan5", title: "Nile Cruises", imageClass: "plan-card-5" },
-    { id: "plan6", title: "Egypt Express", imageClass: "plan-card-1" },
-    { id: "plan7", title: "Coptic / Islamic Culture", imageClass: "plan-card-2" },
-    { id: "plan8", title: "City Breaks", imageClass: "plan-card-3" },
-    { id: "plan9", title: "Red Sea Beach Break", imageClass: "plan-card-4" },
-    { id: "plan10", title: "Nile Cruises", imageClass: "plan-card-5" },
+    { id: "plan1", title: "Egypt Express", imageClass: "plan-card-1", category: "Classic Egypt Tours" },
+    { id: "plan2", title: "Coptic / Islamic Culture", imageClass: "plan-card-2", category: "Coptic/Islamic Culture" },
+    { id: "plan3", title: "City Breaks", imageClass: "plan-card-3", category: "City Breaks" },
+    { id: "plan4", title: "Red Sea Beach Break", imageClass: "plan-card-4", category: "Red sea Beach Breaks" },
+    { id: "plan5", title: "Nile Cruises", imageClass: "plan-card-5", category: "Nile Cruises" },
+    { id: "plan6", title: "Egypt Express", imageClass: "plan-card-1", category: "Classic Egypt Tours" },
+    { id: "plan7", title: "Coptic / Islamic Culture", imageClass: "plan-card-2", category: "Coptic/Islamic Culture" },
+    { id: "plan8", title: "City Breaks", imageClass: "plan-card-3", category: "City Breaks" },
+    { id: "plan9", title: "Red Sea Beach Break", imageClass: "plan-card-4", category: "Red sea Beach Breaks" },
+    { id: "plan10", title: "Nile Cruises", imageClass: "plan-card-5", category: "Nile Cruises" },
 ];
 
 function Home() {
@@ -184,7 +185,8 @@ function Home() {
                                 <h4>Nile Meets the Mediterranean Sea</h4>
                                 <div className="destination-item-description">
                                     <p> <span><FaClock size={16} /></span> 3 Days 2 Nights</p>
-                                    <button className="btn">Explore More</button>
+                                    {/* link to /travel-packages/details/032fd4xZS7XsshJ5BdRE */}
+                                    <button className="btn" onClick={() => navigate(`/travel-packages/details/032fd4xZS7XsshJ5BdRE`)}>Explore More</button>
                                 </div>
                             </div>
                         </div>
@@ -193,7 +195,7 @@ function Home() {
                                 <h4>4-night Cruise Luxor - Aswan</h4>
                                 <div className="destination-item-description">
                                     <p> <span><FaClock size={16} /></span> 5 Days 4 Nights</p>
-                                    <button className="btn">Explore More</button>
+                                    <button className="btn" onClick={() => navigate(`/travel-packages/details/RmzC0kbK1tsblw3Ww4wu`)}>Explore More</button>
                                 </div>
                             </div>
                         </div>
@@ -202,7 +204,7 @@ function Home() {
                                 <h4>A little Bit Off The Beaten Track</h4>
                                 <div className="destination-item-description">
                                     <p> <span><FaClock size={16} /></span> 10 Days 9 Nights</p>
-                                    <button className="btn">Explore More</button>
+                                    <button className="btn" onClick={() => navigate(`/travel-packages/details/Zp3G1HRax6t616dCGjiD`)}>Explore More</button>
                                 </div>
                             </div>
                         </div>
@@ -234,7 +236,12 @@ function Home() {
                             {PLAN_CARDS.map((card, index) => (
                                 <div
                                     key={card.id}
+                                    role="button"
+                                    tabIndex={0}
                                     className={`plan-carousel-item ${card.imageClass} ${index === planActiveIndex ? "is-active" : ""}`}
+                                    onClick={() => navigate(`/travel-packages?category=${encodeURIComponent(card.category)}`)}
+                                    onKeyDown={(e) => e.key === "Enter" && navigate(`/travel-packages?category=${encodeURIComponent(card.category)}`)}
+                                    aria-label={`View ${card.title} packages`}
                                 >
                                     <div className="plan-carousel-item-overlay">
                                         <h4>{card.title}</h4>

@@ -174,7 +174,7 @@ function CruiseShips() {
         setBgIndex(0);
         const id = setInterval(() => {
             setBgIndex((prev) => (prev + 1) % bgImages.length);
-        }, 5000);
+        }, 10000);
 
         return () => clearInterval(id);
     }, [bgImages]);
