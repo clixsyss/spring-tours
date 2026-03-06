@@ -292,7 +292,7 @@ function Home() {
                         {!testimonialsLoading && testimonials.length === 0 && (
                             <p className="testimonials-empty">No testimonials yet.</p>
                         )}
-                        {testimonials.map((t) => {
+                        {testimonials.slice(0, 3).map((t) => {
                             const rating = typeof t.rating === "number" ? Math.min(5, Math.max(1, t.rating)) : 5;
                             return (
                                 <div key={t.id} className="testimonial-item">
