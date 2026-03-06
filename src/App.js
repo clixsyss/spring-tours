@@ -14,6 +14,7 @@ import ScrollToTop from './components/ScrollToTop';
 import WhatsAppChatButton from './components/WhatsAppChatButton';
 import TravelPackagesDetails from './pages/TravelPackagesDetails';
 import Contact from './pages/Contact';
+import Testimonials from './pages/Testimonials';
 
 const pageVariants = {
   initial: { opacity: 0, y: 12 },
@@ -155,6 +156,20 @@ function AnimatedRoutes() {
               transition={pageTransition}
             >
               <Contact />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/testimonials"
+          element={
+            <motion.div
+              variants={pageVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              transition={pageTransition}
+            >
+              <Testimonials />
             </motion.div>
           }
         />

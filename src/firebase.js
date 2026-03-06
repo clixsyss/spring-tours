@@ -30,6 +30,7 @@ export const db = getFirestore(app);
 
 export const TRAVEL_PACKAGES_COLLECTION = "travelPackages";
 export const CRUISE_SHIPS_COLLECTION = "cruiseShips";
+export const TESTIMONIALS_COLLECTION = "testimonials";
 
 /** Categories matching the Travel Packages nav (and dashboard dropdown). */
 export const PACKAGE_CATEGORIES = [
@@ -91,6 +92,17 @@ export async function getCruiseBySlug(slug) {
   if (snapshot.empty) return null;
   const d = snapshot.docs[0];
   return { id: d.id, ...d.data() };
+}
+
+/**
+ * Fetch all testimonials from Firestore, sorted by order.
+ * @returns {Promise<Array<{ id: string, authorName: string, subtitle: string, content: string, rating: number, avatarURL: string, order: number }>>}
+ */
+export async function getTestimonials() {
+  const col = collection(db, TESTIMONIALS_COLLECTION);
+  const q = query(col, orderBy("order", "asc"));
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
 }
 
 /**

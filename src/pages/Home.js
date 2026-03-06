@@ -1,14 +1,11 @@
 import { useRef, useState, useEffect } from "react";
 import { FaClock, FaArrowLeft, FaArrowRight, FaStar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { getCruiseShips } from "../firebase";
+import { getCruiseShips, getTestimonials } from "../firebase";
 import Spinner from "../components/Spinner";
 
 import logo from "../assets/logo.webp";
 import verynile from "../assets/home/verynile.png";
-import testimonial01 from "../assets/home/test01.png";
-import testimonial02 from "../assets/home/test02.png";
-import testimonial03 from "../assets/home/test03.png";
 
 /** Category values must match PACKAGE_CATEGORIES in firebase.js for Travel Packages filter. */
 const PLAN_CARDS = [
@@ -30,6 +27,8 @@ function Home() {
     const [cruisesLoading, setCruisesLoading] = useState(true);
     const [cruisesError, setCruisesError] = useState(null);
     const [activeCruiseIndex, setActiveCruiseIndex] = useState(0);
+    const [testimonials, setTestimonials] = useState([]);
+    const [testimonialsLoading, setTestimonialsLoading] = useState(true);
 
     useEffect(() => {
         let cancelled = false;
@@ -51,6 +50,22 @@ function Home() {
             })
             .finally(() => {
                 if (!cancelled) setCruisesLoading(false);
+            });
+        return () => { cancelled = true; };
+    }, []);
+
+    useEffect(() => {
+        let cancelled = false;
+        setTestimonialsLoading(true);
+        getTestimonials()
+            .then((data) => {
+                if (!cancelled) setTestimonials(Array.isArray(data) ? data : []);
+            })
+            .catch((err) => {
+                if (!cancelled) console.error("Testimonials fetch failed:", err);
+            })
+            .finally(() => {
+                if (!cancelled) setTestimonialsLoading(false);
             });
         return () => { cancelled = true; };
     }, []);
@@ -274,68 +289,35 @@ function Home() {
                     <h1>Hear From Our <br />Happy Travelers</h1>
 
                     <div className="testimonials-list">
-                        <div className="testimonial-item">
-                            <div className="testimonial-item-header">
-                                <img src={testimonial01} alt="testimonial-item-avatar" />
-                                <div className="testimonial-item-header-content">
-                                    <h4>Karin Madlen</h4>
-                                    {/* 5 rating stars */}
-                                    <div className="testimonial-item-rating">
-                                        <FaStar size={16} />
-                                        <FaStar size={16} />
-                                        <FaStar size={16} />
-                                        <FaStar size={16} />
-                                        <FaStar size={16} />
+                        {!testimonialsLoading && testimonials.length === 0 && (
+                            <p className="testimonials-empty">No testimonials yet.</p>
+                        )}
+                        {testimonials.map((t) => {
+                            const rating = typeof t.rating === "number" ? Math.min(5, Math.max(1, t.rating)) : 5;
+                            return (
+                                <div key={t.id} className="testimonial-item">
+                                    <div className="testimonial-item-header">
+                                        {t.avatarURL ? (
+                                            <img src={t.avatarURL} alt="" />
+                                        ) : (
+                                            <div className="testimonial-item-avatar-placeholder" aria-hidden />
+                                        )}
+                                        <div className="testimonial-item-header-content">
+                                            <h4>{t.authorName}</h4>
+                                            <div className="testimonial-item-rating">
+                                                {Array.from({ length: rating }, (_, i) => <FaStar key={i} size={16} />)}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="testimonial-item-content">
+                                        {t.subtitle && <h4>{t.subtitle}</h4>}
+                                        <p>{t.content}</p>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="testimonial-item-content">
-                                <h4>Marsa Alam, Luxor</h4>
-                                <p>Vielen Dank für die tollen Ausflüge und das sie uns sicher nach Marsa Alam gebracht habt. Es war ein sehr schöner Urlaub im September 2018.
-                                    Vielen lieben Dank auch an Aladin der uns Luxor gezeigt hat. Wir kommen gern wieder.</p>
-                            </div>
-                        </div>
-                        <div className="testimonial-item">
-                            <div className="testimonial-item-header">
-                                <img src={testimonial02} alt="testimonial-item-avatar" />
-                                <div className="testimonial-item-header-content">
-                                    <h4>E. Kerry</h4>
-                                    {/* 5 rating stars */}
-                                    <div className="testimonial-item-rating">
-                                        <FaStar size={16} />
-                                        <FaStar size={16} />
-                                        <FaStar size={16} />
-                                        <FaStar size={16} />
-                                        <FaStar size={16} />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="testimonial-item-content">
-                                <h4>Around Egypt</h4>
-                                <p>Awesome tour company! I just got back from Egypt last week and I had the trip of a lifetime. I booked a private tour as I tend to take a lot of photos and like to wander around a lot by myself. The tour guides were very flexible and very patient book with Spring tours!</p>
-                            </div>
-                        </div>
-                        <div className="testimonial-item">
-                            <div className="testimonial-item-header">
-                                <img src={testimonial03} alt="testimonial-item-avatar" />
-                                <div className="testimonial-item-header-content">
-                                    <h4>Susan Jarvis</h4>
-                                    {/* 5 rating stars */}
-                                    <div className="testimonial-item-rating">
-                                        <FaStar size={16} />
-                                        <FaStar size={16} />
-                                        <FaStar size={16} />
-                                        <FaStar size={16} />
-                                        <FaStar size={16} />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="testimonial-item-content">
-                                <h4>Around Egypt</h4>
-                                <p>I just returned from the vacation of a lifetime. Spring Tours is very reputable and I am planning my next adventure for 2019. The guides are extremely knowledgeable and make sure you are safe and well looked after.</p>
-                            </div>
-                        </div>
+                            );
+                        })}
                     </div>
+                    <div className="right-side-button"> <button className="btn" onClick={() => navigate(`/testimonials`)}>Dicover More</button> </div>
                 </div>
             </div>
         </div>

@@ -570,6 +570,21 @@ nav {
   object-fit: cover;
 }
 
+.testimonial-item-avatar-placeholder {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #ddd;
+  flex-shrink: 0;
+}
+
+.testimonials-empty {
+  color: #666;
+  text-align: center;
+  padding: 24px;
+  margin: 0;
+}
+
 .footer {
   background: linear-gradient(to bottom,
       rgba(255, 255, 255, 1) 0%,
@@ -658,7 +673,8 @@ nav {
 
 .about-banner,
 .travel-packages-banner,
-.contact-banner {
+.contact-banner,
+.testimonials-banner {
   background-image: url('./assets/aboutBanner.png');
   background-size: cover;
   background-position: center;
@@ -673,6 +689,10 @@ nav {
   color: var(--tertiary-color);
   font-size: 32px;
   font-weight: 600;
+}
+
+.testimonials-banner {
+  background-image: url('./assets/testimonials.png');
 }
 
 .contact-banner {
