@@ -210,7 +210,7 @@ function Home() {
                         </div>
                     </div>
 
-                    <div className="right-side-button"> <button className="btn">Explore All Destinations</button> </div>
+                    <div className="right-side-button"> <button className="btn" onClick={() => navigate(`/travel-packages`)}>Explore All Destinations</button> </div>
                 </div>
 
                 <div className="plan-container">
